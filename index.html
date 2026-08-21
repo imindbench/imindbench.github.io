@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#3b46a5" />
+  <meta
+    name="description"
+    content="iMINDBench is a multi-institution benchmark for naturalistic cognitive iEEG decoding across datasets, tasks, and preprocessing tracks."
+  />
+  <title>iMINDBench — iEEG Multi-Institution Neural Decoding Benchmark</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>iMINDBench</h1>
+      <p class="site-subtitle">iEEG Multi-Institution Neural Decoding Benchmark</p>
+
+      <nav class="resource-links" aria-label="Benchmark resources">
+        <a
+          class="resource-link"
+          href="https://arxiv.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Read the iMINDBench paper on arXiv"
+        >
+          <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          <span>Paper</span>
+        </a>
+        <a
+          class="resource-link"
+          href="https://github.com/imindbench/iMINDBench"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open the iMINDBench code and data repository"
+        >
+          <i class="fab fa-github" aria-hidden="true"></i>
+          <span>Code &amp; Data</span>
+        </a>
+        <a
+          class="resource-link resource-link-primary"
+          href="leaderboard/"
+          aria-label="Open the iMINDBench leaderboard"
+        >
+          <i class="fas fa-chart-line" aria-hidden="true"></i>
+          <span>Leaderboard</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="intro-section content-section" aria-label="Benchmark summary">
+      <p class="section-lead">
+        iMINDBench provides a <strong>multi-institution, multi-task,
+        preprocessor-structured benchmark</strong> to evaluate iEEG Foundation Models' ability to
+        benefit decoding regardless of recording institution or task, under
+        <strong>comparable preprocessing tracks</strong>.
+      </p>
+
+      <div class="stat-grid" aria-label="Benchmark summary">
+        <div class="stat-card">
+          <strong>3</strong>
+          <span>datasets and institutions</span>
+        </div>
+        <div class="stat-card">
+          <strong>15</strong>
+          <span>aligned decoding tasks</span>
+        </div>
+        <div class="stat-card">
+          <strong>2+</strong>
+          <span>preprocessing tracks</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section figure-section" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <h2 id="overview-title">Benchmark Design</h2>
+        <p>
+          Three naturalistic datasets, explicit preprocessing tracks, and
+          multiple decoding tasks spanning language, vision, and auditory tasks.
+        </p>
+      </div>
+
+      <figure class="figure-card">
+        <img
+          src="assets/images/benchmark_overview.png"
+          alt="Overview of the three iMINDBench datasets, neural preprocessing routes, decoding tasks, temporal splits, scaling domains, and subject subsets."
+          width="1782"
+          height="922"
+        />
+        <figcaption>
+          Datasets (<a href="https://arxiv.org/abs/2509.21671" target="_blank" rel="noopener noreferrer">Neuroprobe</a> / <a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/aefa2385b3f33abf1526ae4e2c208cd9-Abstract-Datasets_and_Benchmarks_Track.html" target="_blank" rel="noopener noreferrer">Brain Treebank</a>, <a href="https://doi.org/10.1038/s41597-024-03029-1" target="_blank" rel="noopener noreferrer">Bang! You&rsquo;re Dead</a>, <a href="https://doi.org/10.1038/s41597-022-01173-0" target="_blank" rel="noopener noreferrer">Pippi</a>) can be easily downloaded from the
+          <a href="https://github.com/neuro-galaxy/torch_brain/" target="_blank" rel="noopener noreferrer">torch_brain</a>
+          package. Recordings are harmonized and flow through standardized Multi-STFT, waveform, or custom preprocessing
+          routes. Models are evaluated under common temporal splits, data-scale
+          regimes, and Main / Challenge subject subsets.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="content-section figure-section" aria-labelledby="datasets-title">
+      <div class="section-heading">
+        <h2 id="datasets-title">Dataset Diversity</h2>
+        <p>
+          Scale, task support, and electrode coverage vary substantially across the benchmark as expected from multi-institution datasets.
+        </p>
+      </div>
+
+      <figure class="figure-card">
+        <img
+          src="assets/images/dataset_summary.png"
+          alt="Summary of training samples, decodable subject-sessions, electrode counts, task coverage, and electrode locations across iMINDBench datasets."
+          width="3402"
+          height="1458"
+          loading="lazy"
+        />
+        <figcaption>
+          Our <a href="leaderboard/">leaderboard</a> features aggregated scores, but also decomposed comparisons by dataset, task, and
+          preprocessing track.
+        </figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>iMINDBench &middot; Multi-institution naturalistic neural decoding</p>
+  </footer>
+</body>
+</html>

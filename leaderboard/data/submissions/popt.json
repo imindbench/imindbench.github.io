@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "model_id": "popt",
+  "display_name": "PopT-v2",
+  "pretrained": true,
+  "pretrained_on": "BrainTreebank",
+  "description": "Population Transformer v2, pretrained on BrainTreebank iEEG data.",
+  "coverage_note": null
+}

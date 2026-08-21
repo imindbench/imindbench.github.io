@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "model_id": "linear_baseline",
+  "display_name": "Linear Baseline",
+  "pretrained": false,
+  "pretrained_on": null,
+  "description": "Linear baseline trained from scratch on waveform features.",
+  "coverage_note": null
+}

@@ -1,0 +1,115 @@
+{
+  "datasets": {
+    "berezutskayapippi2022": {
+      "subject_sessions": [
+        "sub1_sess1",
+        "sub21_sess1",
+        "sub23_sess1",
+        "sub42_sess1",
+        "sub9_sess2"
+      ],
+      "subset": "high-cov",
+      "tasks": [
+        "delta_volume",
+        "face_num",
+        "frame_brightness",
+        "global_flow",
+        "gpt2_surprisal",
+        "local_flow",
+        "onset",
+        "pitch",
+        "speech",
+        "volume",
+        "word_gap",
+        "word_head_pos",
+        "word_index",
+        "word_length",
+        "word_part_speech"
+      ]
+    },
+    "kelesbyd2024": {
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub41_sess2",
+        "sub42_sess1",
+        "sub42_sess2",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub44_sess1",
+        "sub47_sess1",
+        "sub47_sess2",
+        "sub48_sess1",
+        "sub48_sess2",
+        "sub49_sess1",
+        "sub49_sess2",
+        "sub51_sess1",
+        "sub51_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub55_sess2",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub57_sess1",
+        "sub57_sess2",
+        "sub58_sess1",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ],
+      "subset": null,
+      "tasks": [
+        "delta_volume",
+        "face_num",
+        "frame_brightness",
+        "global_flow",
+        "gpt2_surprisal",
+        "local_flow",
+        "onset",
+        "pitch",
+        "speech",
+        "volume",
+        "word_gap",
+        "word_head_pos",
+        "word_index",
+        "word_length",
+        "word_part_speech"
+      ]
+    },
+    "neuroprobev2": {
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0",
+        "sub7_sess0"
+      ],
+      "subset": null,
+      "tasks": [
+        "delta_volume",
+        "face_num",
+        "frame_brightness",
+        "global_flow",
+        "gpt2_surprisal",
+        "local_flow",
+        "onset",
+        "pitch",
+        "speech",
+        "volume",
+        "word_gap",
+        "word_head_pos",
+        "word_index",
+        "word_length",
+        "word_part_speech"
+      ]
+    }
+  },
+  "evaluation_mode": "within-session",
+  "fold_indices": [
+    0,
+    1
+  ],
+  "schema_version": 1
+}

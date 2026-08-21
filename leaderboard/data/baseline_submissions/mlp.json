@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "model_id": "mlp",
+  "display_name": "MLP",
+  "pretrained": false,
+  "pretrained_on": null,
+  "description": "Multi-layer perceptron on STFT and waveform features.",
+  "coverage_note": null
+}

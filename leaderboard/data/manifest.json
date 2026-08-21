@@ -1,0 +1,14 @@
+{
+  "models": [
+    "models/barista.json",
+    "models/cnn.json",
+    "models/diver.json",
+    "models/htnet.json",
+    "models/linear_baseline.json",
+    "models/logistic.json",
+    "models/mlp.json",
+    "models/popt.json"
+  ],
+  "schema_version": 1,
+  "unpublished_models": []
+}

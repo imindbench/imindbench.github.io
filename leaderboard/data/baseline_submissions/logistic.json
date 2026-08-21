@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "model_id": "logistic",
+  "display_name": "Logistic Regression",
+  "pretrained": false,
+  "pretrained_on": null,
+  "description": "Logistic regression baseline on STFT and waveform features.",
+  "coverage_note": null
+}

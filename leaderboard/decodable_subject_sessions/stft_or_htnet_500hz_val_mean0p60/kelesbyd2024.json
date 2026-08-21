@@ -1,0 +1,2721 @@
+{
+  "component_rules": [
+    "val_mean0p60",
+    "htnet_500hz_val_mean0p60"
+  ],
+  "dataset_name": "kelesbyd2024_stft_sweep_with_nonword_tercile",
+  "fold_label": "all_folds",
+  "mean_val_threshold": 0.6,
+  "min_fold_val_threshold": null,
+  "min_val_folds": null,
+  "rule_name": "stft_or_htnet_500hz_val_mean0p60",
+  "selection_metric": "max(stft_val_roc_auc_mean, htnet_500hz_val_roc_auc_mean)",
+  "selection_rule": "max(STFT best validation mean ROC AUC, HTNet 500Hz validation mean ROC AUC) > 0.60",
+  "tasks": {
+    "delta_volume": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5650379067555714,
+      "mean_candidate_best_val_roc_auc": 0.5858954870509133,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.5974281385068543,
+      "mean_decodable_best_val_roc_auc": 0.6239186520019755,
+      "n_subject_sessions": 10,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.6397210743801653,
+          "val_roc_auc_mean": 0.6261747610948961,
+          "val_roc_auc_min": 0.6126284478096269
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess1",
+          "val_roc_auc_max": 0.6341683884297521,
+          "val_roc_auc_mean": 0.6033199973517067,
+          "val_roc_auc_min": 0.5724716062736614
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.6349431818181818,
+          "val_roc_auc_mean": 0.6171606120015733,
+          "val_roc_auc_min": 0.5993780421849648
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.6268078512396694,
+          "val_roc_auc_mean": 0.6081578466582338,
+          "val_roc_auc_min": 0.5895078420767982
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.6558626033057852,
+          "val_roc_auc_mean": 0.6106721538669551,
+          "val_roc_auc_min": 0.5807193077339102
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.6383006198347108,
+          "val_roc_auc_mean": 0.6010328413504731,
+          "val_roc_auc_min": 0.571254732287723
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.7009297520661157,
+          "val_roc_auc_mean": 0.6940646524366533,
+          "val_roc_auc_min": 0.6915900486749594
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.6756198347107438,
+          "val_roc_auc_mean": 0.6419608097296283,
+          "val_roc_auc_min": 0.6083017847485127
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess2",
+          "val_roc_auc_max": 0.6475981404958678,
+          "val_roc_auc_mean": 0.6010097246557219,
+          "val_roc_auc_min": 0.5544213088155759
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub58_sess1",
+          "val_roc_auc_max": 0.6772579772850189,
+          "val_roc_auc_mean": 0.6356331208739143,
+          "val_roc_auc_min": 0.5940082644628099
+        }
+      ],
+      "subject_sessions": [
+        "sub43_sess1",
+        "sub47_sess1",
+        "sub48_sess1",
+        "sub51_sess1",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub57_sess2",
+        "sub58_sess1"
+      ]
+    },
+    "face_num": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6550234542617013,
+      "mean_candidate_best_val_roc_auc": 0.6910341581967385,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6650401728864475,
+      "mean_decodable_best_val_roc_auc": 0.7004057851530882,
+      "n_subject_sessions": 27,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.7353395061728395,
+          "val_roc_auc_mean": 0.7018541121296877,
+          "val_roc_auc_min": 0.6683687180865359
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.6189196452566514,
+          "val_roc_auc_mean": 0.6099999460851159,
+          "val_roc_auc_min": 0.6010802469135803
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess1",
+          "val_roc_auc_max": 0.7024993281375973,
+          "val_roc_auc_mean": 0.7023299109823788,
+          "val_roc_auc_min": 0.7021604938271605
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess2",
+          "val_roc_auc_max": 0.709217952163397,
+          "val_roc_auc_mean": 0.7074146029707931,
+          "val_roc_auc_min": 0.7057242676699812
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.8258532652512764,
+          "val_roc_auc_mean": 0.7514541466352136,
+          "val_roc_auc_min": 0.7106481481481481
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.778554152109648,
+          "val_roc_auc_mean": 0.7712305408741178,
+          "val_roc_auc_min": 0.7669981187852727
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.7729105079279763,
+          "val_roc_auc_mean": 0.740236118161519,
+          "val_roc_auc_min": 0.7075617283950617
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess2",
+          "val_roc_auc_max": 0.8132716049382717,
+          "val_roc_auc_mean": 0.724157973928421,
+          "val_roc_auc_min": 0.6350443429185703
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.7739854877721043,
+          "val_roc_auc_mean": 0.6584047809230892,
+          "val_roc_auc_min": 0.5619457135178716
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess2",
+          "val_roc_auc_max": 0.6648750335931202,
+          "val_roc_auc_mean": 0.6082862822286589,
+          "val_roc_auc_min": 0.5516975308641976
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.8027411986025261,
+          "val_roc_auc_mean": 0.7482070190543495,
+          "val_roc_auc_min": 0.6936728395061729
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess2",
+          "val_roc_auc_max": 0.7484567901234568,
+          "val_roc_auc_mean": 0.7081440091439644,
+          "val_roc_auc_min": 0.6678312281644719
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.7922601451222789,
+          "val_roc_auc_mean": 0.7421948873759543,
+          "val_roc_auc_min": 0.6921296296296297
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess2",
+          "val_roc_auc_max": 0.7997850040311743,
+          "val_roc_auc_mean": 0.679213489669908,
+          "val_roc_auc_min": 0.662037037037037
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.8113410373555494,
+          "val_roc_auc_mean": 0.7652432929884108,
+          "val_roc_auc_min": 0.7368827160493827
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.6460628863208815,
+          "val_roc_auc_mean": 0.6436332950122926,
+          "val_roc_auc_min": 0.6412037037037037
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.7162053211502284,
+          "val_roc_auc_mean": 0.6547847593405463,
+          "val_roc_auc_min": 0.5933641975308642
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.8379467884977156,
+          "val_roc_auc_mean": 0.7438190732612036,
+          "val_roc_auc_min": 0.6496913580246914
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess1",
+          "val_roc_auc_max": 0.8347218489653319,
+          "val_roc_auc_mean": 0.7924399305244509,
+          "val_roc_auc_min": 0.7824074074074076
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess2",
+          "val_roc_auc_max": 0.6707874227358237,
+          "val_roc_auc_mean": 0.6297609953185292,
+          "val_roc_auc_min": 0.5887345679012347
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.7637731792528891,
+          "val_roc_auc_mean": 0.7476273303671853,
+          "val_roc_auc_min": 0.7314814814814815
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.7522171459285139,
+          "val_roc_auc_mean": 0.6793493137049977,
+          "val_roc_auc_min": 0.6659500134372481
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess1",
+          "val_roc_auc_max": 0.6959876543209876,
+          "val_roc_auc_mean": 0.6286196586938995,
+          "val_roc_auc_min": 0.5697393173877989
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess2",
+          "val_roc_auc_max": 0.6774691358024691,
+          "val_roc_auc_mean": 0.6462459895620785,
+          "val_roc_auc_min": 0.6373456790123457
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.7618919645256652,
+          "val_roc_auc_mean": 0.7057916612751782,
+          "val_roc_auc_min": 0.6496913580246914
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.7507716049382716,
+          "val_roc_auc_mean": 0.7251573692522586,
+          "val_roc_auc_min": 0.6995431335662455
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.7121741467347487,
+          "val_roc_auc_mean": 0.6953557096691783,
+          "val_roc_auc_min": 0.6831496909432948
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub41_sess2",
+        "sub42_sess1",
+        "sub42_sess2",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub44_sess1",
+        "sub47_sess2",
+        "sub48_sess1",
+        "sub48_sess2",
+        "sub49_sess1",
+        "sub49_sess2",
+        "sub51_sess1",
+        "sub51_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub55_sess2",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub57_sess1",
+        "sub57_sess2",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "frame_brightness": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.4988302178668589,
+      "mean_candidate_best_val_roc_auc": 0.5435794852029849,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6011388718957785,
+      "mean_decodable_best_val_roc_auc": 0.6317261148248646,
+      "n_subject_sessions": 3,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.6866325785244705,
+          "val_roc_auc_mean": 0.6457170279510627,
+          "val_roc_auc_min": 0.6048014773776548
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess2",
+          "val_roc_auc_max": 0.6530314097881665,
+          "val_roc_auc_mean": 0.6075252462914362,
+          "val_roc_auc_min": 0.562019082794706
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.6472760849492152,
+          "val_roc_auc_mean": 0.6419360702320949,
+          "val_roc_auc_min": 0.6365960555149746
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess2",
+        "sub49_sess2",
+        "sub62_sess1"
+      ]
+    },
+    "global_flow": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6063631887807187,
+      "mean_candidate_best_val_roc_auc": 0.6420853058172017,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6357775629482435,
+      "mean_decodable_best_val_roc_auc": 0.66821508355248,
+      "n_subject_sessions": 22,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.6736569951163458,
+          "val_roc_auc_mean": 0.6443206931877254,
+          "val_roc_auc_min": 0.6149843912591052
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess1",
+          "val_roc_auc_max": 0.7282390117782247,
+          "val_roc_auc_mean": 0.6721319928818283,
+          "val_roc_auc_min": 0.6160249739854319
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.7697710718002081,
+          "val_roc_auc_mean": 0.7546068803413566,
+          "val_roc_auc_min": 0.739442688882505
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.6711758584807491,
+          "val_roc_auc_mean": 0.662505481667838,
+          "val_roc_auc_min": 0.6538351048549268
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.7064062051134732,
+          "val_roc_auc_mean": 0.6968555479261435,
+          "val_roc_auc_min": 0.6873048907388137
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess1",
+          "val_roc_auc_max": 0.606147658718759,
+          "val_roc_auc_mean": 0.6010707076112005,
+          "val_roc_auc_min": 0.5959937565036421
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.7702913631633715,
+          "val_roc_auc_mean": 0.7448124440062764,
+          "val_roc_auc_min": 0.7193335248491812
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess2",
+          "val_roc_auc_max": 0.6990114464099895,
+          "val_roc_auc_mean": 0.6626341345810361,
+          "val_roc_auc_min": 0.6262568227520828
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.7075553002010916,
+          "val_roc_auc_mean": 0.699641333763397,
+          "val_roc_auc_min": 0.6917273673257024
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.6722164412070759,
+          "val_roc_auc_mean": 0.6333072116478304,
+          "val_roc_auc_min": 0.608445848893996
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess2",
+          "val_roc_auc_max": 0.6932882414151925,
+          "val_roc_auc_mean": 0.6800253330029137,
+          "val_roc_auc_min": 0.6673369721344441
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.7698937087043952,
+          "val_roc_auc_mean": 0.7440716902010946,
+          "val_roc_auc_min": 0.7349115504682622
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.7250790002872737,
+          "val_roc_auc_mean": 0.640535726723426,
+          "val_roc_auc_min": 0.5939125910509886
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.7242455775234131,
+          "val_roc_auc_mean": 0.6738148312782248,
+          "val_roc_auc_min": 0.6233840850330364
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.7020970985349038,
+          "val_roc_auc_mean": 0.6792814404104218,
+          "val_roc_auc_min": 0.6662330905306971
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess1",
+          "val_roc_auc_max": 0.7299626544096525,
+          "val_roc_auc_mean": 0.686391316798999,
+          "val_roc_auc_min": 0.6428199791883455
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess2",
+          "val_roc_auc_max": 0.7388137356919875,
+          "val_roc_auc_mean": 0.6831098267658444,
+          "val_roc_auc_min": 0.6274059178397012
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.6564205688020683,
+          "val_roc_auc_mean": 0.6384340096871943,
+          "val_roc_auc_min": 0.6204474505723204
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess1",
+          "val_roc_auc_max": 0.7960356219477162,
+          "val_roc_auc_mean": 0.616670256343265,
+          "val_roc_auc_min": 0.4373048907388138
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.6788279230106291,
+          "val_roc_auc_mean": 0.6393619323689983,
+          "val_roc_auc_min": 0.6131633714880332
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.6246097814776275,
+          "val_roc_auc_mean": 0.6033132216781989,
+          "val_roc_auc_min": 0.5820166618787704
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.6766389177939647,
+          "val_roc_auc_mean": 0.6438358252813474,
+          "val_roc_auc_min": 0.6248204538925596
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub42_sess1",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub44_sess1",
+        "sub47_sess1",
+        "sub48_sess1",
+        "sub48_sess2",
+        "sub49_sess1",
+        "sub51_sess1",
+        "sub51_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub55_sess2",
+        "sub56_sess1",
+        "sub57_sess1",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "gpt2_surprisal": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5477116259578544,
+      "mean_candidate_best_val_roc_auc": 0.5775778256704981,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.5935714285714285,
+      "mean_decodable_best_val_roc_auc": 0.6235863095238094,
+      "n_subject_sessions": 7,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.644375,
+          "val_roc_auc_mean": 0.6040885416666666,
+          "val_roc_auc_min": 0.5638020833333333
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.6380208333333333,
+          "val_roc_auc_mean": 0.6021354166666666,
+          "val_roc_auc_min": 0.56625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.7012499999999999,
+          "val_roc_auc_mean": 0.672890625,
+          "val_roc_auc_min": 0.64453125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.6202256944444444,
+          "val_roc_auc_mean": 0.6069878472222222,
+          "val_roc_auc_min": 0.59375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.671875,
+          "val_roc_auc_mean": 0.6321614583333333,
+          "val_roc_auc_min": 0.5924479166666666
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub58_sess1",
+          "val_roc_auc_max": 0.6219618055555556,
+          "val_roc_auc_mean": 0.6209809027777777,
+          "val_roc_auc_min": 0.62
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.6775,
+          "val_roc_auc_mean": 0.625859375,
+          "val_roc_auc_min": 0.57421875
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess2",
+        "sub44_sess1",
+        "sub53_sess1",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub58_sess1",
+        "sub62_sess1"
+      ]
+    },
+    "local_flow": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6013994991012195,
+      "mean_candidate_best_val_roc_auc": 0.6227731577273524,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6232445796781467,
+      "mean_decodable_best_val_roc_auc": 0.6470278853104161,
+      "n_subject_sessions": 20,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.631591796875,
+          "val_roc_auc_mean": 0.6191985449403355,
+          "val_roc_auc_min": 0.6068052930056711
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.7048939298466709,
+          "val_roc_auc_mean": 0.6866754805483355,
+          "val_roc_auc_min": 0.66845703125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.6517538332283134,
+          "val_roc_auc_mean": 0.6071269166141566,
+          "val_roc_auc_min": 0.5625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.653076171875,
+          "val_roc_auc_mean": 0.6474790647234694,
+          "val_roc_auc_min": 0.6418819575719387
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.656494140625,
+          "val_roc_auc_mean": 0.6322798365380828,
+          "val_roc_auc_min": 0.6080655324511658
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.742919921875,
+          "val_roc_auc_mean": 0.7117246112210538,
+          "val_roc_auc_min": 0.6805293005671077
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess2",
+          "val_roc_auc_max": 0.630615234375,
+          "val_roc_auc_mean": 0.6233338594586879,
+          "val_roc_auc_min": 0.6175173282923757
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.700439453125,
+          "val_roc_auc_mean": 0.6559328120487424,
+          "val_roc_auc_min": 0.6114261709724848
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.6404116782188616,
+          "val_roc_auc_mean": 0.6126863078594308,
+          "val_roc_auc_min": 0.5849609375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.658203125,
+          "val_roc_auc_mean": 0.6241026126995379,
+          "val_roc_auc_min": 0.5900021003990759
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.745849609375,
+          "val_roc_auc_mean": 0.7178103329378676,
+          "val_roc_auc_min": 0.6897710565007352
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess1",
+          "val_roc_auc_max": 0.7059441293845832,
+          "val_roc_auc_mean": 0.6854915959422916,
+          "val_roc_auc_min": 0.6650390625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess2",
+          "val_roc_auc_max": 0.6381012392354547,
+          "val_roc_auc_mean": 0.6076248383677274,
+          "val_roc_auc_min": 0.5771484375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.6546943919344675,
+          "val_roc_auc_mean": 0.6132566359483302,
+          "val_roc_auc_min": 0.6093257718966604
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess1",
+          "val_roc_auc_max": 0.736083984375,
+          "val_roc_auc_mean": 0.7218542165101214,
+          "val_roc_auc_min": 0.7076244486452427
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess2",
+          "val_roc_auc_max": 0.690185546875,
+          "val_roc_auc_mean": 0.6636182932862713,
+          "val_roc_auc_min": 0.6370510396975425
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub58_sess1",
+          "val_roc_auc_max": 0.6740180634320522,
+          "val_roc_auc_mean": 0.6130100082785261,
+          "val_roc_auc_min": 0.552001953125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.6376953125,
+          "val_roc_auc_mean": 0.6020106039385764,
+          "val_roc_auc_min": 0.5914723797521529
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.60693359375,
+          "val_roc_auc_mean": 0.6038238647178902,
+          "val_roc_auc_min": 0.6007141356857802
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.7204368830077715,
+          "val_roc_auc_mean": 0.6915172696288858,
+          "val_roc_auc_min": 0.66259765625
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub44_sess1",
+        "sub48_sess1",
+        "sub49_sess1",
+        "sub51_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub55_sess2",
+        "sub56_sess1",
+        "sub57_sess1",
+        "sub57_sess2",
+        "sub58_sess1",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "onset": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.7341056034482759,
+      "mean_candidate_best_val_roc_auc": 0.7813341864224138,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.7567274305555556,
+      "mean_decodable_best_val_roc_auc": 0.8019929108796297,
+      "n_subject_sessions": 27,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.7705078125,
+          "val_roc_auc_mean": 0.759765625,
+          "val_roc_auc_min": 0.7490234375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.6591796875,
+          "val_roc_auc_mean": 0.61279296875,
+          "val_roc_auc_min": 0.56640625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess1",
+          "val_roc_auc_max": 0.76171875,
+          "val_roc_auc_mean": 0.74267578125,
+          "val_roc_auc_min": 0.7236328125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess2",
+          "val_roc_auc_max": 0.8828125,
+          "val_roc_auc_mean": 0.78662109375,
+          "val_roc_auc_min": 0.6904296875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.9375,
+          "val_roc_auc_mean": 0.89404296875,
+          "val_roc_auc_min": 0.8623046875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.935546875,
+          "val_roc_auc_mean": 0.86962890625,
+          "val_roc_auc_min": 0.8037109375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.80859375,
+          "val_roc_auc_mean": 0.74609375,
+          "val_roc_auc_min": 0.693359375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess1",
+          "val_roc_auc_max": 0.849609375,
+          "val_roc_auc_mean": 0.6796875,
+          "val_roc_auc_min": 0.509765625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.9462890625,
+          "val_roc_auc_mean": 0.87353515625,
+          "val_roc_auc_min": 0.80078125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess2",
+          "val_roc_auc_max": 0.8564453125,
+          "val_roc_auc_mean": 0.814453125,
+          "val_roc_auc_min": 0.7724609375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.896484375,
+          "val_roc_auc_mean": 0.81640625,
+          "val_roc_auc_min": 0.7822265625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess2",
+          "val_roc_auc_max": 0.6376953125,
+          "val_roc_auc_mean": 0.62158203125,
+          "val_roc_auc_min": 0.6201171875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.916015625,
+          "val_roc_auc_mean": 0.86669921875,
+          "val_roc_auc_min": 0.8173828125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess2",
+          "val_roc_auc_max": 0.796875,
+          "val_roc_auc_mean": 0.75927734375,
+          "val_roc_auc_min": 0.7353515625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.9306640625,
+          "val_roc_auc_mean": 0.92919921875,
+          "val_roc_auc_min": 0.927734375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.9072265625,
+          "val_roc_auc_mean": 0.78271484375,
+          "val_roc_auc_min": 0.6943359375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.8349609375,
+          "val_roc_auc_mean": 0.82275390625,
+          "val_roc_auc_min": 0.810546875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.9501953125,
+          "val_roc_auc_mean": 0.92333984375,
+          "val_roc_auc_min": 0.896484375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess1",
+          "val_roc_auc_max": 0.88671875,
+          "val_roc_auc_mean": 0.86474609375,
+          "val_roc_auc_min": 0.8427734375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess2",
+          "val_roc_auc_max": 0.7890625,
+          "val_roc_auc_mean": 0.78125,
+          "val_roc_auc_min": 0.7734375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.9716796875,
+          "val_roc_auc_mean": 0.96240234375,
+          "val_roc_auc_min": 0.953125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.927734375,
+          "val_roc_auc_mean": 0.8779296875,
+          "val_roc_auc_min": 0.8515625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess1",
+          "val_roc_auc_max": 0.7255859375,
+          "val_roc_auc_mean": 0.69091796875,
+          "val_roc_auc_min": 0.65625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess2",
+          "val_roc_auc_max": 0.927734375,
+          "val_roc_auc_mean": 0.7626953125,
+          "val_roc_auc_min": 0.607421875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.78515625,
+          "val_roc_auc_mean": 0.69775390625,
+          "val_roc_auc_min": 0.6630859375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.8974609375,
+          "val_roc_auc_mean": 0.82666015625,
+          "val_roc_auc_min": 0.755859375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.904296875,
+          "val_roc_auc_mean": 0.88818359375,
+          "val_roc_auc_min": 0.8720703125
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub41_sess2",
+        "sub42_sess1",
+        "sub42_sess2",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub44_sess1",
+        "sub47_sess1",
+        "sub48_sess1",
+        "sub48_sess2",
+        "sub49_sess1",
+        "sub49_sess2",
+        "sub51_sess1",
+        "sub51_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub55_sess2",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub57_sess1",
+        "sub57_sess2",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "pitch": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6321728087566115,
+      "mean_candidate_best_val_roc_auc": 0.6794224705765174,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6527701909851987,
+      "mean_decodable_best_val_roc_auc": 0.7025954456597602,
+      "n_subject_sessions": 24,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.71435546875,
+          "val_roc_auc_mean": 0.6744311608732532,
+          "val_roc_auc_min": 0.6345068529965062
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess1",
+          "val_roc_auc_max": 0.775634765625,
+          "val_roc_auc_mean": 0.7195830372064801,
+          "val_roc_auc_min": 0.6635313087879602
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess2",
+          "val_roc_auc_max": 0.694091796875,
+          "val_roc_auc_mean": 0.6171763132285508,
+          "val_roc_auc_min": 0.5890889545821015
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.771728515625,
+          "val_roc_auc_mean": 0.7356358245956228,
+          "val_roc_auc_min": 0.6995431335662456
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.780029296875,
+          "val_roc_auc_mean": 0.7334319650085662,
+          "val_roc_auc_min": 0.7153990862671324
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.8231658156409567,
+          "val_roc_auc_mean": 0.7957381812579783,
+          "val_roc_auc_min": 0.784423828125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess1",
+          "val_roc_auc_max": 0.7548828125,
+          "val_roc_auc_mean": 0.6915446575916252,
+          "val_roc_auc_min": 0.6323568933082504
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.768310546875,
+          "val_roc_auc_mean": 0.7000649751305932,
+          "val_roc_auc_min": 0.6318194033861865
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess2",
+          "val_roc_auc_max": 0.814697265625,
+          "val_roc_auc_mean": 0.7706918201277378,
+          "val_roc_auc_min": 0.7266863746304757
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.737060546875,
+          "val_roc_auc_mean": 0.7070145518572796,
+          "val_roc_auc_min": 0.6769685568395591
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess2",
+          "val_roc_auc_max": 0.72607421875,
+          "val_roc_auc_mean": 0.6153886277840298,
+          "val_roc_auc_min": 0.5047030368180596
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.71630859375,
+          "val_roc_auc_mean": 0.6559237136984346,
+          "val_roc_auc_min": 0.5955388336468691
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess2",
+          "val_roc_auc_max": 0.7511421660843859,
+          "val_roc_auc_mean": 0.717795204135943,
+          "val_roc_auc_min": 0.6844482421875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.85302734375,
+          "val_roc_auc_mean": 0.759219933632592,
+          "val_roc_auc_min": 0.6715936576189195
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.6710561676968556,
+          "val_roc_auc_mean": 0.6333796463484278,
+          "val_roc_auc_min": 0.609619140625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.81298828125,
+          "val_roc_auc_mean": 0.7312724260321486,
+          "val_roc_auc_min": 0.6495565708142973
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.73193359375,
+          "val_roc_auc_mean": 0.67126107260733,
+          "val_roc_auc_min": 0.6105885514646601
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess1",
+          "val_roc_auc_max": 0.82275390625,
+          "val_roc_auc_mean": 0.7857386838425491,
+          "val_roc_auc_min": 0.748723461435098
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.817138671875,
+          "val_roc_auc_mean": 0.7118480244620902,
+          "val_roc_auc_min": 0.6065573770491802
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.683837890625,
+          "val_roc_auc_mean": 0.6250417617596916,
+          "val_roc_auc_min": 0.5662456328943832
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess2",
+          "val_roc_auc_max": 0.7213114754098361,
+          "val_roc_auc_mean": 0.712584448642418,
+          "val_roc_auc_min": 0.703857421875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.77685546875,
+          "val_roc_auc_mean": 0.681090996938827,
+          "val_roc_auc_min": 0.5853265251276539
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.72265625,
+          "val_roc_auc_mean": 0.6712213776118651,
+          "val_roc_auc_min": 0.6363880677237301
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.7514109110454178,
+          "val_roc_auc_mean": 0.7452122914602088,
+          "val_roc_auc_min": 0.739013671875
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub42_sess1",
+        "sub42_sess2",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub44_sess1",
+        "sub47_sess1",
+        "sub48_sess1",
+        "sub48_sess2",
+        "sub49_sess1",
+        "sub49_sess2",
+        "sub51_sess1",
+        "sub51_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub57_sess2",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "speech": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.8057337772284099,
+      "mean_candidate_best_val_roc_auc": 0.8435188055341963,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.8057337772284099,
+      "mean_decodable_best_val_roc_auc": 0.8435188055341963,
+      "n_subject_sessions": 29,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.7779423868312757,
+          "val_roc_auc_mean": 0.7699724909934926,
+          "val_roc_auc_min": 0.7620025951557095
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.7641152263374485,
+          "val_roc_auc_mean": 0.6806086512310079,
+          "val_roc_auc_min": 0.5971020761245673
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess1",
+          "val_roc_auc_max": 0.8645112456747406,
+          "val_roc_auc_mean": 0.8605683800390164,
+          "val_roc_auc_min": 0.8566255144032922
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess2",
+          "val_roc_auc_max": 0.8847736625514403,
+          "val_roc_auc_mean": 0.7919828689464166,
+          "val_roc_auc_min": 0.7314554498269896
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.966965830449827,
+          "val_roc_auc_mean": 0.9500947122070809,
+          "val_roc_auc_min": 0.9350129757785467
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.9511111111111112,
+          "val_roc_auc_mean": 0.9255447424067667,
+          "val_roc_auc_min": 0.8999783737024222
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.9066117969821674,
+          "val_roc_auc_mean": 0.8153301199443709,
+          "val_roc_auc_min": 0.7240484429065743
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess1",
+          "val_roc_auc_max": 0.8365051903114186,
+          "val_roc_auc_mean": 0.8093096405228759,
+          "val_roc_auc_min": 0.7822222222222222
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess2",
+          "val_roc_auc_max": 0.6402465397923874,
+          "val_roc_auc_mean": 0.6031136677014064,
+          "val_roc_auc_min": 0.5659807956104254
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.9401920438957475,
+          "val_roc_auc_mean": 0.8604371767921644,
+          "val_roc_auc_min": 0.7806823096885813
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess2",
+          "val_roc_auc_max": 0.900082304526749,
+          "val_roc_auc_mean": 0.8963268356543779,
+          "val_roc_auc_min": 0.8925713667820069
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.8634299307958477,
+          "val_roc_auc_mean": 0.8629083810357839,
+          "val_roc_auc_min": 0.8623868312757201
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess2",
+          "val_roc_auc_max": 0.761299740484429,
+          "val_roc_auc_mean": 0.7313432244720691,
+          "val_roc_auc_min": 0.7252378892733564
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.9586282578875172,
+          "val_roc_auc_mean": 0.9237687160921013,
+          "val_roc_auc_min": 0.9190123456790124
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess2",
+          "val_roc_auc_max": 0.8035665294924553,
+          "val_roc_auc_mean": 0.8021671315282346,
+          "val_roc_auc_min": 0.8007677335640139
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.983758573388203,
+          "val_roc_auc_mean": 0.9760348079561043,
+          "val_roc_auc_min": 0.96875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.9010056228373703,
+          "val_roc_auc_mean": 0.8240281886477661,
+          "val_roc_auc_min": 0.7470507544581619
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.9139814013840831,
+          "val_roc_auc_mean": 0.9057149805274325,
+          "val_roc_auc_min": 0.897448559670782
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.9457887517146776,
+          "val_roc_auc_mean": 0.9084772579753275,
+          "val_roc_auc_min": 0.8944307270233196
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess1",
+          "val_roc_auc_max": 0.9331687242798354,
+          "val_roc_auc_mean": 0.9130322427627551,
+          "val_roc_auc_min": 0.8928957612456747
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess2",
+          "val_roc_auc_max": 0.9051851851851851,
+          "val_roc_auc_mean": 0.8736836393053953,
+          "val_roc_auc_min": 0.8421820934256056
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.9686418685121106,
+          "val_roc_auc_mean": 0.9651567417090293,
+          "val_roc_auc_min": 0.9632352941176471
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.9745953360768176,
+          "val_roc_auc_mean": 0.929744683609343,
+          "val_roc_auc_min": 0.8848940311418685
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess1",
+          "val_roc_auc_max": 0.8375324394463668,
+          "val_roc_auc_mean": 0.7779431744556937,
+          "val_roc_auc_min": 0.7183539094650205
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess2",
+          "val_roc_auc_max": 0.9669117647058824,
+          "val_roc_auc_mean": 0.855623234890664,
+          "val_roc_auc_min": 0.7443347050754459
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub58_sess1",
+          "val_roc_auc_max": 0.7969272976680383,
+          "val_roc_auc_mean": 0.6302434931246765,
+          "val_roc_auc_min": 0.4667495674740485
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.9252126200274349,
+          "val_roc_auc_mean": 0.8644295522614759,
+          "val_roc_auc_min": 0.8101211072664359
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.9186831275720164,
+          "val_roc_auc_mean": 0.884163146830991,
+          "val_roc_auc_min": 0.8496431660899655
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.8962962962962961,
+          "val_roc_auc_mean": 0.8702934768678713,
+          "val_roc_auc_min": 0.8511029411764706
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub41_sess2",
+        "sub42_sess1",
+        "sub42_sess2",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub44_sess1",
+        "sub47_sess1",
+        "sub47_sess2",
+        "sub48_sess1",
+        "sub48_sess2",
+        "sub49_sess1",
+        "sub49_sess2",
+        "sub51_sess1",
+        "sub51_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub55_sess2",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub57_sess1",
+        "sub57_sess2",
+        "sub58_sess1",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "volume": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6839391762452107,
+      "mean_candidate_best_val_roc_auc": 0.7185249042145593,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6905753968253967,
+      "mean_decodable_best_val_roc_auc": 0.7240860615079364,
+      "n_subject_sessions": 28,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.6536111111111111,
+          "val_roc_auc_mean": 0.6383680555555555,
+          "val_roc_auc_min": 0.623125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.6322222222222222,
+          "val_roc_auc_mean": 0.6214236111111111,
+          "val_roc_auc_min": 0.610625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess1",
+          "val_roc_auc_max": 0.7172222222222222,
+          "val_roc_auc_mean": 0.713298611111111,
+          "val_roc_auc_min": 0.709375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess2",
+          "val_roc_auc_max": 0.7274999999999999,
+          "val_roc_auc_mean": 0.6446875,
+          "val_roc_auc_min": 0.5675
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.8500000000000001,
+          "val_roc_auc_mean": 0.8429166666666668,
+          "val_roc_auc_min": 0.8358333333333333
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.8355555555555556,
+          "val_roc_auc_mean": 0.6974652777777778,
+          "val_roc_auc_min": 0.6168750000000001
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.7449999999999999,
+          "val_roc_auc_mean": 0.7105555555555555,
+          "val_roc_auc_min": 0.684375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess1",
+          "val_roc_auc_max": 0.758125,
+          "val_roc_auc_mean": 0.6522569444444445,
+          "val_roc_auc_min": 0.633888888888889
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.778125,
+          "val_roc_auc_mean": 0.7665625,
+          "val_roc_auc_min": 0.755
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess2",
+          "val_roc_auc_max": 0.7191666666666666,
+          "val_roc_auc_mean": 0.6773958333333332,
+          "val_roc_auc_min": 0.65125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.749375,
+          "val_roc_auc_mean": 0.7059375,
+          "val_roc_auc_min": 0.6625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess2",
+          "val_roc_auc_max": 0.7012499999999999,
+          "val_roc_auc_mean": 0.641875,
+          "val_roc_auc_min": 0.5825
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.85375,
+          "val_roc_auc_mean": 0.8085416666666667,
+          "val_roc_auc_min": 0.7633333333333334
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess2",
+          "val_roc_auc_max": 0.7549999999999999,
+          "val_roc_auc_mean": 0.7430555555555556,
+          "val_roc_auc_min": 0.7311111111111112
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.83125,
+          "val_roc_auc_mean": 0.8211805555555556,
+          "val_roc_auc_min": 0.8111111111111111
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.8125,
+          "val_roc_auc_mean": 0.7252777777777777,
+          "val_roc_auc_min": 0.6380555555555555
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.858125,
+          "val_roc_auc_mean": 0.8410069444444445,
+          "val_roc_auc_min": 0.8238888888888889
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.7969444444444445,
+          "val_roc_auc_mean": 0.7359722222222222,
+          "val_roc_auc_min": 0.675
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess1",
+          "val_roc_auc_max": 0.7394444444444443,
+          "val_roc_auc_mean": 0.7275694444444444,
+          "val_roc_auc_min": 0.7188888888888888
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess2",
+          "val_roc_auc_max": 0.7619444444444444,
+          "val_roc_auc_mean": 0.7534722222222222,
+          "val_roc_auc_min": 0.745
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.9368749999999999,
+          "val_roc_auc_mean": 0.9101041666666666,
+          "val_roc_auc_min": 0.889375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.88125,
+          "val_roc_auc_mean": 0.8700694444444445,
+          "val_roc_auc_min": 0.8588888888888889
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess1",
+          "val_roc_auc_max": 0.7424999999999999,
+          "val_roc_auc_mean": 0.6159027777777777,
+          "val_roc_auc_min": 0.514375
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess2",
+          "val_roc_auc_max": 0.753125,
+          "val_roc_auc_mean": 0.7237500000000001,
+          "val_roc_auc_min": 0.7075000000000001
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub58_sess1",
+          "val_roc_auc_max": 0.7083333333333334,
+          "val_roc_auc_mean": 0.6219791666666667,
+          "val_roc_auc_min": 0.535625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.720625,
+          "val_roc_auc_mean": 0.6858680555555555,
+          "val_roc_auc_min": 0.6511111111111111
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.7105555555555556,
+          "val_roc_auc_mean": 0.6893402777777777,
+          "val_roc_auc_min": 0.668125
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.7052777777777778,
+          "val_roc_auc_mean": 0.688576388888889,
+          "val_roc_auc_min": 0.671875
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub41_sess2",
+        "sub42_sess1",
+        "sub42_sess2",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub44_sess1",
+        "sub47_sess1",
+        "sub48_sess1",
+        "sub48_sess2",
+        "sub49_sess1",
+        "sub49_sess2",
+        "sub51_sess1",
+        "sub51_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub55_sess2",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub57_sess1",
+        "sub57_sess2",
+        "sub58_sess1",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "word_gap": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5565531627580135,
+      "mean_candidate_best_val_roc_auc": 0.5917105937627732,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.5988308941818317,
+      "mean_decodable_best_val_roc_auc": 0.6370235762410797,
+      "n_subject_sessions": 11,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.718192627824019,
+          "val_roc_auc_mean": 0.6744077325971306,
+          "val_roc_auc_min": 0.6306228373702422
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.6306228373702423,
+          "val_roc_auc_mean": 0.6047911120802801,
+          "val_roc_auc_min": 0.5945303210463734
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess2",
+          "val_roc_auc_max": 0.7312722948870393,
+          "val_roc_auc_mean": 0.6991136560940387,
+          "val_roc_auc_min": 0.6669550173010381
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess2",
+          "val_roc_auc_max": 0.6373365041617122,
+          "val_roc_auc_mean": 0.6210038922192644,
+          "val_roc_auc_min": 0.6046712802768166
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.6432818073721759,
+          "val_roc_auc_mean": 0.6304644330978526,
+          "val_roc_auc_min": 0.6176470588235294
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess2",
+          "val_roc_auc_max": 0.746730083234245,
+          "val_roc_auc_mean": 0.6441262872918629,
+          "val_roc_auc_min": 0.5493079584775087
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.6599286563614745,
+          "val_roc_auc_mean": 0.6002930479039206,
+          "val_roc_auc_min": 0.5406574394463668
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.7300832342449465,
+          "val_roc_auc_mean": 0.6652146275030961,
+          "val_roc_auc_min": 0.6003460207612458
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.6288927335640139,
+          "val_roc_auc_mean": 0.6212240124419356,
+          "val_roc_auc_min": 0.6135552913198573
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.6799307958477508,
+          "val_roc_auc_mean": 0.6378250887681085,
+          "val_roc_auc_min": 0.595719381688466
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.6444636678200691,
+          "val_roc_auc_mean": 0.6087954486543865,
+          "val_roc_auc_min": 0.5731272294887039
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub41_sess2",
+        "sub42_sess2",
+        "sub48_sess2",
+        "sub51_sess1",
+        "sub51_sess2",
+        "sub54_sess1",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub60_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "word_head_pos": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5373295464230317,
+      "mean_candidate_best_val_roc_auc": 0.5582875807523822,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6027877621636889,
+      "mean_decodable_best_val_roc_auc": 0.6107278499635148,
+      "n_subject_sessions": 3,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.6204584775086506,
+          "val_roc_auc_mean": 0.6146169938563661,
+          "val_roc_auc_min": 0.6087755102040816
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.6165657439446367,
+          "val_roc_auc_mean": 0.6164461372784408,
+          "val_roc_auc_min": 0.6163265306122448
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.6189795918367347,
+          "val_roc_auc_mean": 0.6011204187557375,
+          "val_roc_auc_min": 0.5832612456747405
+        }
+      ],
+      "subject_sessions": [
+        "sub43_sess2",
+        "sub48_sess1",
+        "sub56_sess1"
+      ]
+    },
+    "word_index": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5664819639562935,
+      "mean_candidate_best_val_roc_auc": 0.6039367674187598,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.5968415718550794,
+      "mean_decodable_best_val_roc_auc": 0.6301333333333333,
+      "n_subject_sessions": 17,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.6864,
+          "val_roc_auc_mean": 0.6469311385459533,
+          "val_roc_auc_min": 0.6464
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.6304,
+          "val_roc_auc_mean": 0.6087528120713306,
+          "val_roc_auc_min": 0.5871056241426611
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess2",
+          "val_roc_auc_max": 0.6608,
+          "val_roc_auc_mean": 0.634240877914952,
+          "val_roc_auc_min": 0.6076817558299039
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess1",
+          "val_roc_auc_max": 0.688,
+          "val_roc_auc_mean": 0.6272647462277092,
+          "val_roc_auc_min": 0.5665294924554184
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.6433470507544581,
+          "val_roc_auc_mean": 0.632073525377229,
+          "val_roc_auc_min": 0.6208
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess2",
+          "val_roc_auc_max": 0.6591999999999999,
+          "val_roc_auc_mean": 0.6053201646090534,
+          "val_roc_auc_min": 0.5514403292181069
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.6368,
+          "val_roc_auc_mean": 0.6160680384087791,
+          "val_roc_auc_min": 0.5953360768175583
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.6448,
+          "val_roc_auc_mean": 0.6138951989026062,
+          "val_roc_auc_min": 0.5829903978052126
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.6447999999999999,
+          "val_roc_auc_mean": 0.6344713305898491,
+          "val_roc_auc_min": 0.6241426611796983
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.6255144032921811,
+          "val_roc_auc_mean": 0.6023572016460905,
+          "val_roc_auc_min": 0.5791999999999999
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess1",
+          "val_roc_auc_max": 0.7216,
+          "val_roc_auc_mean": 0.6474941015089164,
+          "val_roc_auc_min": 0.5733882030178327
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub55_sess2",
+          "val_roc_auc_max": 0.6880000000000001,
+          "val_roc_auc_mean": 0.6553854595336077,
+          "val_roc_auc_min": 0.6227709190672154
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.7664,
+          "val_roc_auc_mean": 0.7137898491083676,
+          "val_roc_auc_min": 0.6611796982167353
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.6598079561042525,
+          "val_roc_auc_mean": 0.6203039780521262,
+          "val_roc_auc_min": 0.5808
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub60_sess1",
+          "val_roc_auc_max": 0.6652949245541838,
+          "val_roc_auc_mean": 0.646247462277092,
+          "val_roc_auc_min": 0.6272
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.6528,
+          "val_roc_auc_mean": 0.6007484224965707,
+          "val_roc_auc_min": 0.5486968449931413
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.6432,
+          "val_roc_auc_mean": 0.6069223593964335,
+          "val_roc_auc_min": 0.5706447187928669
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub43_sess1",
+        "sub43_sess2",
+        "sub47_sess1",
+        "sub49_sess1",
+        "sub49_sess2",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess1",
+        "sub54_sess2",
+        "sub55_sess1",
+        "sub55_sess2",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub60_sess1",
+        "sub62_sess1",
+        "sub62_sess2"
+      ]
+    },
+    "word_length": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5622915763364619,
+      "mean_candidate_best_val_roc_auc": 0.5948982729130535,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6079934188407746,
+      "mean_decodable_best_val_roc_auc": 0.642522966816837,
+      "n_subject_sessions": 11,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.6479289940828402,
+          "val_roc_auc_mean": 0.6413473095414202,
+          "val_roc_auc_min": 0.634765625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess2",
+          "val_roc_auc_max": 0.7159763313609467,
+          "val_roc_auc_mean": 0.6446092594304733,
+          "val_roc_auc_min": 0.5732421875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.6730769230769231,
+          "val_roc_auc_mean": 0.6036283052884616,
+          "val_roc_auc_min": 0.572265625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub44_sess1",
+          "val_roc_auc_max": 0.7174556213017752,
+          "val_roc_auc_mean": 0.6946653106508875,
+          "val_roc_auc_min": 0.671875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.6701183431952662,
+          "val_roc_auc_mean": 0.6368169840976331,
+          "val_roc_auc_min": 0.603515625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.7795857988165681,
+          "val_roc_auc_mean": 0.671042899408284,
+          "val_roc_auc_min": 0.5828402366863905
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess1",
+          "val_roc_auc_max": 0.6875,
+          "val_roc_auc_mean": 0.6492233727810651,
+          "val_roc_auc_min": 0.6109467455621302
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub53_sess2",
+          "val_roc_auc_max": 0.6416015625,
+          "val_roc_auc_mean": 0.604084804918639,
+          "val_roc_auc_min": 0.587890625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess2",
+          "val_roc_auc_max": 0.636094674556213,
+          "val_roc_auc_mean": 0.6354301497781065,
+          "val_roc_auc_min": 0.634765625
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.6982248520710059,
+          "val_roc_auc_mean": 0.666983519785503,
+          "val_roc_auc_min": 0.6357421875
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess2",
+          "val_roc_auc_max": 0.6597633136094675,
+          "val_roc_auc_mean": 0.6199207193047338,
+          "val_roc_auc_min": 0.580078125
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess2",
+        "sub42_sess2",
+        "sub43_sess1",
+        "sub44_sess1",
+        "sub48_sess1",
+        "sub51_sess1",
+        "sub53_sess1",
+        "sub53_sess2",
+        "sub54_sess2",
+        "sub56_sess2",
+        "sub62_sess2"
+      ]
+    },
+    "word_part_speech": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5842120262182959,
+      "mean_candidate_best_val_roc_auc": 0.6133513821601595,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.628236914600551,
+      "mean_decodable_best_val_roc_auc": 0.6554407713498622,
+      "n_subject_sessions": 15,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess1",
+          "val_roc_auc_max": 0.6301652892561983,
+          "val_roc_auc_mean": 0.6053719008264462,
+          "val_roc_auc_min": 0.5805785123966942
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub41_sess2",
+          "val_roc_auc_max": 0.6301652892561983,
+          "val_roc_auc_mean": 0.6105371900826446,
+          "val_roc_auc_min": 0.603305785123967
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub42_sess1",
+          "val_roc_auc_max": 0.6549586776859504,
+          "val_roc_auc_mean": 0.6456611570247934,
+          "val_roc_auc_min": 0.6363636363636364
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub43_sess1",
+          "val_roc_auc_max": 0.7004132231404959,
+          "val_roc_auc_mean": 0.6549586776859504,
+          "val_roc_auc_min": 0.609504132231405
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub47_sess1",
+          "val_roc_auc_max": 0.6838842975206612,
+          "val_roc_auc_mean": 0.6673553719008265,
+          "val_roc_auc_min": 0.6508264462809917
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess1",
+          "val_roc_auc_max": 0.6797520661157025,
+          "val_roc_auc_mean": 0.6208677685950412,
+          "val_roc_auc_min": 0.5805785123966942
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub48_sess2",
+          "val_roc_auc_max": 0.725206611570248,
+          "val_roc_auc_mean": 0.6859504132231405,
+          "val_roc_auc_min": 0.6466942148760331
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub49_sess1",
+          "val_roc_auc_max": 0.6735537190082644,
+          "val_roc_auc_mean": 0.6590909090909092,
+          "val_roc_auc_min": 0.6446280991735538
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub51_sess1",
+          "val_roc_auc_max": 0.7210743801652892,
+          "val_roc_auc_mean": 0.6787190082644627,
+          "val_roc_auc_min": 0.6363636363636364
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub54_sess1",
+          "val_roc_auc_max": 0.7148760330578512,
+          "val_roc_auc_mean": 0.6621900826446281,
+          "val_roc_auc_min": 0.609504132231405
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess1",
+          "val_roc_auc_max": 0.6900826446280992,
+          "val_roc_auc_mean": 0.6291322314049588,
+          "val_roc_auc_min": 0.628099173553719
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub56_sess2",
+          "val_roc_auc_max": 0.7458677685950413,
+          "val_roc_auc_mean": 0.703512396694215,
+          "val_roc_auc_min": 0.6611570247933884
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub57_sess2",
+          "val_roc_auc_max": 0.6838842975206612,
+          "val_roc_auc_mean": 0.6518595041322315,
+          "val_roc_auc_min": 0.6198347107438017
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub58_sess1",
+          "val_roc_auc_max": 0.7293388429752066,
+          "val_roc_auc_mean": 0.7169421487603306,
+          "val_roc_auc_min": 0.7045454545454546
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub62_sess1",
+          "val_roc_auc_max": 0.6818181818181819,
+          "val_roc_auc_mean": 0.6394628099173554,
+          "val_roc_auc_min": 0.6115702479338843
+        }
+      ],
+      "subject_sessions": [
+        "sub41_sess1",
+        "sub41_sess2",
+        "sub42_sess1",
+        "sub43_sess1",
+        "sub47_sess1",
+        "sub48_sess1",
+        "sub48_sess2",
+        "sub49_sess1",
+        "sub51_sess1",
+        "sub54_sess1",
+        "sub56_sess1",
+        "sub56_sess2",
+        "sub57_sess2",
+        "sub58_sess1",
+        "sub62_sess1"
+      ]
+    }
+  }
+}

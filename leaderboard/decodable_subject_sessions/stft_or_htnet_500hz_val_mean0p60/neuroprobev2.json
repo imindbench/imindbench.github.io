@@ -1,0 +1,671 @@
+{
+  "component_rules": [
+    "val_mean0p60",
+    "htnet_500hz_val_mean0p60"
+  ],
+  "dataset_name": "neuroprobev2_stft_sweep_with_val",
+  "fold_label": "all_folds",
+  "mean_val_threshold": 0.6,
+  "min_fold_val_threshold": null,
+  "min_val_folds": null,
+  "rule_name": "stft_or_htnet_500hz_val_mean0p60",
+  "selection_metric": "max(stft_val_roc_auc_mean, htnet_500hz_val_roc_auc_mean)",
+  "selection_rule": "max(STFT best validation mean ROC AUC, HTNet 500Hz validation mean ROC AUC) > 0.60",
+  "tasks": {
+    "delta_volume": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.7225665356922949,
+      "mean_candidate_best_val_roc_auc": 0.7398490954116312,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.7644873353677484,
+      "mean_decodable_best_val_roc_auc": 0.7824405710659454,
+      "n_subject_sessions": 4,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.7296061774448033,
+          "val_roc_auc_mean": 0.7261632341723875,
+          "val_roc_auc_min": 0.7227202908999717
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.8545656875960002,
+          "val_roc_auc_mean": 0.8284719392286554,
+          "val_roc_auc_min": 0.8023781908613106
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.8040552542762505,
+          "val_roc_auc_mean": 0.7821620011911852,
+          "val_roc_auc_min": 0.76026874810612
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.8133481077395158,
+          "val_roc_auc_mean": 0.7929651096715535,
+          "val_roc_auc_min": 0.7725821116035914
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0"
+      ]
+    },
+    "face_num": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.529198139462338,
+      "mean_candidate_best_val_roc_auc": 0.5527112147780253,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6265895530965591,
+      "mean_decodable_best_val_roc_auc": 0.6505961150643136,
+      "n_subject_sessions": 1,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.674602677032068,
+          "val_roc_auc_mean": 0.6505961150643136,
+          "val_roc_auc_min": 0.6265895530965591
+        }
+      ],
+      "subject_sessions": [
+        "sub1_sess1"
+      ]
+    },
+    "frame_brightness": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5427906701776568,
+      "mean_candidate_best_val_roc_auc": 0.5660774800365714,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6481560404591431,
+      "mean_decodable_best_val_roc_auc": 0.6497556540515967,
+      "n_subject_sessions": 1,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.6513552676440504,
+          "val_roc_auc_mean": 0.6497556540515967,
+          "val_roc_auc_min": 0.6481560404591431
+        }
+      ],
+      "subject_sessions": [
+        "sub4_sess0"
+      ]
+    },
+    "global_flow": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6153041946145619,
+      "mean_candidate_best_val_roc_auc": 0.6298509314846402,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6992074438627839,
+      "mean_decodable_best_val_roc_auc": 0.7088414156296041,
+      "n_subject_sessions": 2,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.7471448125973063,
+          "val_roc_auc_mean": 0.7326128752494698,
+          "val_roc_auc_min": 0.7180809379016333
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.6898059621955426,
+          "val_roc_auc_mean": 0.6850699560097385,
+          "val_roc_auc_min": 0.6803339498239345
+        }
+      ],
+      "subject_sessions": [
+        "sub1_sess1",
+        "sub3_sess0"
+      ]
+    },
+    "gpt2_surprisal": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6027434495099284,
+      "mean_candidate_best_val_roc_auc": 0.6139752528046276,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6392067124332571,
+      "mean_decodable_best_val_roc_auc": 0.6516410143882637,
+      "n_subject_sessions": 3,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.6263910222250086,
+          "val_roc_auc_mean": 0.6184288893765086,
+          "val_roc_auc_min": 0.6104667565280085
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.6533285267964432,
+          "val_roc_auc_mean": 0.627744166849524,
+          "val_roc_auc_min": 0.602159806902605
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.7125064000083592,
+          "val_roc_auc_mean": 0.7087499869387585,
+          "val_roc_auc_min": 0.7049935738691577
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0"
+      ]
+    },
+    "local_flow": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5813274269909194,
+      "mean_candidate_best_val_roc_auc": 0.6033915799333429,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6051116474927639,
+      "mean_decodable_best_val_roc_auc": 0.6214390701789215,
+      "n_subject_sessions": 3,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.6280837591298079,
+          "val_roc_auc_mean": 0.6044899323950137,
+          "val_roc_auc_min": 0.5808961056602195
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.6355861362757698,
+          "val_roc_auc_mean": 0.6224935477466745,
+          "val_roc_auc_min": 0.6094009592175793
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.6496295831896597,
+          "val_roc_auc_mean": 0.6373337303950763,
+          "val_roc_auc_min": 0.6250378776004931
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0"
+      ]
+    },
+    "onset": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.9226803528278211,
+      "mean_candidate_best_val_roc_auc": 0.9294372611153718,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.9226803528278211,
+      "mean_decodable_best_val_roc_auc": 0.9294372611153718,
+      "n_subject_sessions": 5,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.9553140096618359,
+          "val_roc_auc_mean": 0.952609745851712,
+          "val_roc_auc_min": 0.949905482041588
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.9565739339213947,
+          "val_roc_auc_mean": 0.953027950310559,
+          "val_roc_auc_min": 0.9494819666997233
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.9613387250138449,
+          "val_roc_auc_mean": 0.9567829639614223,
+          "val_roc_auc_min": 0.9522272029089996
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.8974833562901745,
+          "val_roc_auc_mean": 0.8707242883379247,
+          "val_roc_auc_min": 0.8609532828282829
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub7_sess0",
+          "val_roc_auc_max": 0.9297723164373113,
+          "val_roc_auc_mean": 0.9140413571152419,
+          "val_roc_auc_min": 0.9008338296605123
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0",
+        "sub7_sess0"
+      ]
+    },
+    "pitch": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5816397625753607,
+      "mean_candidate_best_val_roc_auc": 0.6183942414162544,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.5869561324847411,
+      "mean_decodable_best_val_roc_auc": 0.6253067313232057,
+      "n_subject_sessions": 4,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.6539450173975737,
+          "val_roc_auc_mean": 0.6165480705933983,
+          "val_roc_auc_min": 0.579151123789223
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.7539053112232637,
+          "val_roc_auc_mean": 0.6484201122221873,
+          "val_roc_auc_min": 0.5561215426893618
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.6399747134363604,
+          "val_roc_auc_mean": 0.6350114416475973,
+          "val_roc_auc_min": 0.6300481698588342
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.6199909080577338,
+          "val_roc_auc_mean": 0.6012473008296397,
+          "val_roc_auc_min": 0.5825036936015456
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0"
+      ]
+    },
+    "speech": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.9049225207151291,
+      "mean_candidate_best_val_roc_auc": 0.914856901037585,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.9049225207151291,
+      "mean_decodable_best_val_roc_auc": 0.914856901037585,
+      "n_subject_sessions": 5,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.901027136035443,
+          "val_roc_auc_mean": 0.8943606783486411,
+          "val_roc_auc_min": 0.8876942206618392
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.9710562887265811,
+          "val_roc_auc_mean": 0.9663620785137352,
+          "val_roc_auc_min": 0.9616678683008892
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.9486640962143297,
+          "val_roc_auc_mean": 0.946584746559669,
+          "val_roc_auc_min": 0.9445053969050082
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.884010950544915,
+          "val_roc_auc_mean": 0.8689408900452441,
+          "val_roc_auc_min": 0.8538708295455733
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub7_sess0",
+          "val_roc_auc_max": 0.9228759808992403,
+          "val_roc_auc_mean": 0.8980361117206358,
+          "val_roc_auc_min": 0.8768742881623357
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0",
+        "sub7_sess0"
+      ]
+    },
+    "volume": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6694634086427866,
+      "mean_candidate_best_val_roc_auc": 0.699805335166884,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.7034295763630791,
+      "mean_decodable_best_val_roc_auc": 0.7338245665166754,
+      "n_subject_sessions": 4,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.6857360793287567,
+          "val_roc_auc_mean": 0.6682836483704795,
+          "val_roc_auc_min": 0.6508312174122024
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.8235635246543994,
+          "val_roc_auc_mean": 0.7947556502930941,
+          "val_roc_auc_min": 0.765947775931789
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.8106015485407981,
+          "val_roc_auc_mean": 0.7463611381043436,
+          "val_roc_auc_min": 0.6918591893671044
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.7467155358563473,
+          "val_roc_auc_mean": 0.7258978292987839,
+          "val_roc_auc_min": 0.7050801227412206
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0"
+      ]
+    },
+    "word_gap": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.615326477773183,
+      "mean_candidate_best_val_roc_auc": 0.6310363854956652,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6401561328057496,
+      "mean_decodable_best_val_roc_auc": 0.65675481961239,
+      "n_subject_sessions": 4,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.7171666509931767,
+          "val_roc_auc_mean": 0.7006964253994127,
+          "val_roc_auc_min": 0.6842261998056487
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.6336373990366028,
+          "val_roc_auc_mean": 0.627576982957692,
+          "val_roc_auc_min": 0.6215165668787812
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.6984943000741878,
+          "val_roc_auc_mean": 0.6856916711074887,
+          "val_roc_auc_min": 0.6728890421407898
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.6441156755721537,
+          "val_roc_auc_mean": 0.613054198984966,
+          "val_roc_auc_min": 0.5819927223977784
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0"
+      ]
+    },
+    "word_head_pos": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.6022402641505491,
+      "mean_candidate_best_val_roc_auc": 0.6095446328746225,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6571998787916784,
+      "mean_decodable_best_val_roc_auc": 0.6596514738304964,
+      "n_subject_sessions": 2,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.6639342549345371,
+          "val_roc_auc_mean": 0.6623982529283303,
+          "val_roc_auc_min": 0.6608622509221236
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.6602718828040919,
+          "val_roc_auc_mean": 0.6569046947326626,
+          "val_roc_auc_min": 0.6535375066612332
+        }
+      ],
+      "subject_sessions": [
+        "sub1_sess1",
+        "sub3_sess0"
+      ]
+    },
+    "word_index": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.7344963358583808,
+      "mean_candidate_best_val_roc_auc": 0.7379422595924526,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.7727998313205693,
+      "mean_decodable_best_val_roc_auc": 0.775897271710013,
+      "n_subject_sessions": 4,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.8026958700359375,
+          "val_roc_auc_mean": 0.7867111065764263,
+          "val_roc_auc_min": 0.7855434252740647
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.7931389975115535,
+          "val_roc_auc_mean": 0.7867401350870955,
+          "val_roc_auc_min": 0.7803412726626376
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.8112190839463568,
+          "val_roc_auc_mean": 0.8106174128901402,
+          "val_roc_auc_min": 0.8100157418339237
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.7322976471912642,
+          "val_roc_auc_mean": 0.7195204322863897,
+          "val_roc_auc_min": 0.7152988855116515
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0"
+      ]
+    },
+    "word_length": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.599031481391606,
+      "mean_candidate_best_val_roc_auc": 0.6091531644957715,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6134592157981054,
+      "mean_decodable_best_val_roc_auc": 0.6188414326319294,
+      "n_subject_sessions": 4,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub10_sess0",
+          "val_roc_auc_max": 0.6059998119181217,
+          "val_roc_auc_mean": 0.6026874810611997,
+          "val_roc_auc_min": 0.5993751502042779
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.62279656855062,
+          "val_roc_auc_mean": 0.6157957430801542,
+          "val_roc_auc_min": 0.6087949176096883
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.6493631338620524,
+          "val_roc_auc_mean": 0.6486656635633157,
+          "val_roc_auc_min": 0.647968193264579
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub4_sess0",
+          "val_roc_auc_max": 0.6470848960109103,
+          "val_roc_auc_mean": 0.6082168428230481,
+          "val_roc_auc_min": 0.5976986021138766
+        }
+      ],
+      "subject_sessions": [
+        "sub10_sess0",
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub4_sess0"
+      ]
+    },
+    "word_part_speech": {
+      "mean_candidate_best_min_fold_val_roc_auc": 0.5925083968163578,
+      "mean_candidate_best_val_roc_auc": 0.6054817286429547,
+      "mean_decodable_best_min_fold_val_roc_auc": 0.6348936385304165,
+      "mean_decodable_best_val_roc_auc": 0.6427952681205136,
+      "n_subject_sessions": 3,
+      "subject_session_details": [
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub1_sess1",
+          "val_roc_auc_max": 0.6492118158284023,
+          "val_roc_auc_mean": 0.6423440967085798,
+          "val_roc_auc_min": 0.6354763775887575
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub3_sess0",
+          "val_roc_auc_max": 0.6783002164076333,
+          "val_roc_auc_mean": 0.6683716965046889,
+          "val_roc_auc_min": 0.6584431766017443
+        },
+        {
+          "is_decodable": true,
+          "meets_min_val_folds": true,
+          "n_val_folds": 2,
+          "subject_session": "sub7_sess0",
+          "val_roc_auc_max": 0.6245786608957964,
+          "val_roc_auc_mean": 0.617670011148272,
+          "val_roc_auc_min": 0.6107613614007475
+        }
+      ],
+      "subject_sessions": [
+        "sub1_sess1",
+        "sub3_sess0",
+        "sub7_sess0"
+      ]
+    }
+  }
+}

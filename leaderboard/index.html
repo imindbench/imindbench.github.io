@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#3b46a5" />
+  <title>iMINDBench</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-home-link" href="/" aria-label="Return to the iMINDBench homepage">
+        <h1 class="site-title">iMINDBench</h1>
+        <p class="site-subtitle">
+          iEEG Multi-Institution Neural Decoding Benchmark
+        </p>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main-content">
+
+    <!-- Tab switcher -->
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn active" data-tab="leaderboard" role="tab" aria-selected="true">
+        Leaderboard
+      </button>
+      <button class="tab-btn" data-tab="analysis" role="tab" aria-selected="false">
+        Per-task Analysis
+      </button>
+      <button class="tab-btn" data-tab="subjects" role="tab" aria-selected="false">
+        Per-subject Analysis
+      </button>
+    </div>
+
+    <!-- ===== SHARED FILTER BAR ===== -->
+    <section class="filter-bar" aria-label="Filters">
+      <div class="filter-group">
+        <label class="filter-label" for="filter-track">Track</label>
+        <select id="filter-track" class="filter-select">
+          <option value="all">All tracks</option>
+          <option value="STFT">STFT</option>
+          <option value="WAV">WAV</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="filter-dataset">Dataset</label>
+        <select id="filter-dataset" class="filter-select">
+          <option value="all">All datasets</option>
+        </select>
+      </div>
+
+      <div class="filter-group" id="model-filter-group">
+        <label class="filter-label">Models</label>
+        <div class="multiselect" id="model-multiselect">
+          <button class="multiselect-btn" id="model-ms-btn" type="button">All models ▾</button>
+          <div class="multiselect-panel hidden" id="model-ms-panel">
+            <label class="ms-option ms-all">
+              <input type="checkbox" id="ms-all-models" checked> All models
+            </label>
+            <div class="ms-divider"></div>
+            <div id="model-ms-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-group" id="task-filter-group">
+        <label class="filter-label">Tasks</label>
+        <div class="multiselect" id="task-multiselect">
+          <button class="multiselect-btn" id="task-ms-btn" type="button">All tasks ▾</button>
+          <div class="multiselect-panel hidden" id="task-ms-panel">
+            <label class="ms-option ms-all">
+              <input type="checkbox" id="ms-all-tasks" checked> All tasks
+            </label>
+            <div class="ms-divider"></div>
+            <div id="task-ms-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="filter-decodable">Subjects</label>
+        <select id="filter-decodable" class="filter-select">
+          <option value="all">All subjects</option>
+          <option value="resolved">Main</option>
+          <option value="unresolved">Challenge</option>
+        </select>
+      </div>
+
+      <div class="filter-group metric-toggle-group">
+        <span class="filter-label">Metric</span>
+        <div class="toggle-btn-group" role="group" aria-label="Metric">
+          <button class="toggle-btn active" data-metric="roc_auc">ROC-AUC</button>
+          <button class="toggle-btn" data-metric="accuracy">Accuracy</button>
+        </div>
+      </div>
+
+      <div class="filter-group" style="justify-content:flex-end;margin-top:auto">
+        <button id="reset-filters" class="reset-btn" type="button" title="Reset all filters to defaults">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0">
+            <path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5A6.5 6.5 0 1 1 8 1.5a6.46 6.46 0 0 1 4.24 1.59L10 5.5h5v-5l-1.35 1.85z" fill="currentColor"/>
+          </svg>
+          Reset
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== SUMMARY CARDS ===== -->
+    <section class="summary-cards" aria-label="Summary">
+      <div class="card">
+        <span class="card-value" id="summary-models">—</span>
+        <span class="card-label">Models</span>
+      </div>
+      <div class="card">
+        <span class="card-value" id="summary-runs">—</span>
+        <span class="card-label">Runs</span>
+      </div>
+      <div class="card">
+        <span class="card-value" id="summary-tasks">—</span>
+        <span class="card-label">Tasks</span>
+      </div>
+      <div class="card">
+        <span class="card-value" id="summary-subjects">—</span>
+        <span class="card-label">Subject-sessions</span>
+      </div>
+    </section>
+
+    <!-- ===== LEADERBOARD TAB ===== -->
+    <div id="tab-leaderboard" class="tab-panel active" role="tabpanel">
+      <div class="table-wrapper">
+        <div id="table-container">
+          <div class="empty-state" id="table-empty">
+            <p>Loading data&hellip;</p>
+          </div>
+        </div>
+      </div>
+      <p class="table-note">
+        Values are mean test scores averaged across folds and subject-sessions.
+        Click a row to see preprocessing details.
+        <span id="task-scope-note"></span>
+      </p>
+    </div>
+
+    <!-- ===== ANALYSIS TAB ===== -->
+    <div id="tab-analysis" class="tab-panel" role="tabpanel">
+      <div id="charts-container">
+        <div class="empty-state" id="charts-empty">
+          <p>Loading data&hellip;</p>
+        </div>
+      </div>
+      <p class="table-note">
+        Bars show mean test score &plusmn; standard error across subject-sessions and folds.
+        Dashed lines show the STFT reference roofline per task.
+        Dotted line at 0.5 is chance level.
+      </p>
+    </div>
+
+    <!-- ===== SUBJECTS TAB ===== -->
+    <div id="tab-subjects" class="tab-panel" role="tabpanel">
+      <div id="subject-charts-container">
+        <div class="empty-state">
+          <p>Loading data&hellip;</p>
+        </div>
+      </div>
+      <p class="table-note">
+        Bars show mean test score &plusmn; standard error across all tasks and folds for each subject-session.
+        Dotted line at 0.5 is chance level.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- ===== CONFIG MODAL ===== -->
+  <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-title" id="modal-title">Run Details</h2>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- App logic loads checked-in data artifacts over HTTP. -->
+  <script src="app.js"></script>
+
+</body>
+</html>
