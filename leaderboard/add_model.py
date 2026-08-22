@@ -8,10 +8,13 @@ import sys
 from pathlib import Path
 
 from leaderboard_data import (
+    DEFAULT_DECODABLE_DIR,
     LeaderboardDataError,
     build_artifact,
+    classify_coverage_cohort,
     extract_records,
     json_bytes,
+    load_cohort_cells,
     load_json,
     manifest_model_paths,
     make_manifest,
@@ -29,7 +32,16 @@ DEFAULT_MANIFEST = HERE / "data/manifest.json"
 DEFAULT_CONTRACT = HERE / "data/coverage_contract.json"
 
 
-def _summary_lines(artifact: dict) -> list[str]:
+def _cohort_label(artifact: dict, cohorts: dict) -> str:
+    try:
+        return classify_coverage_cohort(
+            artifact["runs"], artifact["records"], cohorts
+        )
+    except (LeaderboardDataError, KeyError, TypeError):
+        return "not an admissible cohort"
+
+
+def _summary_lines(artifact: dict, cohorts: dict) -> list[str]:
     summary = summarize_artifact(artifact)
     coverage = summary["coverage"]
     lines = [
@@ -40,6 +52,7 @@ def _summary_lines(artifact: dict) -> list[str]:
         f"datasets: {', '.join(summary['datasets'])}",
         f"tasks: {len(summary['tasks'])}",
         f"coverage: {coverage['observed_result_cells']}/{coverage['expected_result_cells']} ({coverage['status']})",
+        f"cohort: {_cohort_label(artifact, cohorts)}",
     ]
     for key, item in coverage["by_model_preprocess_key"].items():
         lines.append(
@@ -56,6 +69,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--models-dir", type=Path, default=DEFAULT_MODELS)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--coverage-contract", type=Path, default=DEFAULT_CONTRACT)
+    parser.add_argument("--decodable-dir", type=Path, default=DEFAULT_DECODABLE_DIR)
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
@@ -64,20 +78,23 @@ def main(argv: list[str] | None = None) -> int:
         contract = validate_coverage_contract(
             load_json(args.coverage_contract.resolve())
         )
+        cohorts = load_cohort_cells(args.decodable_dir.resolve(), contract)
         records = extract_records(
             args.model_outputs.resolve(),
             expected_model_id=submission["model_id"],
             contract=contract,
         )
-        artifact = build_artifact(submission, records, contract)
-        print("\n".join(_summary_lines(artifact)))
+        artifact = build_artifact(submission, records, contract, cohorts)
+        print("\n".join(_summary_lines(artifact, cohorts)))
         models_dir = args.models_dir.resolve()
         manifest_path = args.manifest.resolve()
         if manifest_path.exists():
             existing_manifest = load_json(manifest_path)
             validate_manifest(existing_manifest, manifest_path.parent)
             for relative in manifest_model_paths(existing_manifest):
-                validate_artifact(load_json(manifest_path.parent / relative), contract)
+                validate_artifact(
+                    load_json(manifest_path.parent / relative), contract, cohorts
+                )
         target = models_dir / f"{submission['model_id']}.json"
         proposed = json_bytes(artifact)
         differs = target.exists() and target.read_bytes() != proposed
@@ -85,9 +102,17 @@ def main(argv: list[str] | None = None) -> int:
             try:
                 existing = load_json(target)
                 print("existing artifact:")
-                print("\n".join(f"  {line}" for line in _summary_lines(existing)))
+                print(
+                    "\n".join(
+                        f"  {line}" for line in _summary_lines(existing, cohorts)
+                    )
+                )
                 print("proposed artifact:")
-                print("\n".join(f"  {line}" for line in _summary_lines(artifact)))
+                print(
+                    "\n".join(
+                        f"  {line}" for line in _summary_lines(artifact, cohorts)
+                    )
+                )
             except (LeaderboardDataError, KeyError, TypeError):
                 print("existing artifact could not be summarized", file=sys.stderr)
             if args.dry_run:

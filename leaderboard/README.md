@@ -111,15 +111,29 @@ python validate_data.py
 ```
 
 Checks the manifest, every visible and unpublished artifact, run references,
-record uniqueness, the benchmark coverage contract, and the decodable-subject
-manifests, using only checked-in files. There is no CI check yet, so run it
-before opening a pull request.
+record uniqueness, the benchmark coverage contract, the decodable-subject
+manifests, the cohort rule, and every submission file, using only checked-in
+files. Submissions and artifacts must correspond one-to-one, and an artifact's
+`model` block must match its submission file, so hand-editing one without the
+other fails.
+
+[`.github/workflows/validate-leaderboard.yml`](../.github/workflows/validate-leaderboard.yml)
+runs this same command on every pull request, so a local pass should match the
+repository check.
 
 ## Coverage behavior
 
 Coverage is computed separately for each logical preprocessing entry. A
 complete entry contains the expected tasks, subject/session cells, and fold
 indices for all benchmark datasets.
+
+A submission is expected to cover the full benchmark grid. If it cannot, the
+only accepted fallback is covering exactly the `Main` or exactly the
+`Challenge` cohort, using the same choice for every logical entry of the model.
+Any other subset is rejected, because an average over an arbitrary set of
+subject-sessions cannot be compared with the other rows of the leaderboard.
+`add_model.py` prints the classification it derives from the
+decodable-subject manifests described below.
 
 Missing benchmark cells make coverage `partial`; they do not fail the command.
 The browser then shows an automatic footnote counting the missing result cells
@@ -136,7 +150,9 @@ the records are all validation errors.
 The **Subjects** filter splits subject-sessions into `Main` (decodable) and
 `Challenge` (not decodable) using one fixed rule: `max(STFT, HTNet 500Hz)` mean
 validation ROC-AUC greater than 0.60. The per-dataset manifests are checked in
-under `decodable_subject_sessions/stft_or_htnet_500hz_val_mean0p60/`.
+under `decodable_subject_sessions/stft_or_htnet_500hz_val_mean0p60/`. The same
+manifests define the admissible cohorts above, so every listed session must also
+appear in the coverage contract.
 
 Only `subject_sessions` and `n_subject_sessions` are required per task; the
 roofline fields (`mean_test_roc_auc`, `max_test_roc_auc`) are optional and the
@@ -169,6 +185,8 @@ The external directory is never copied into `leaderboard/`.
 ## Layout
 
 ```text
+.github/workflows/                   # CI: runs validate_data.py on every PR
+
 leaderboard/
   index.html                         # the leaderboard app
   submit.html                        # public submission guide

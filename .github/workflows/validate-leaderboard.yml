@@ -1,0 +1,19 @@
+name: Validate leaderboard data
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # The validator is standard library only, so there is nothing to install.
+      - name: Validate checked-in data
+        working-directory: leaderboard
+        run: python validate_data.py

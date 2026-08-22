@@ -62,9 +62,9 @@
     <section class="submit-intro">
       <h2>Submit a model</h2>
       <p>
-        A submission is a pull request that adds one model's public metadata and
-        its generated publication artifact. Raw evaluation outputs stay outside
-        the repository; the tooling reads them from a path you pass in.
+        Adding a model to the leaderboard is a pull request that changes three
+        files. Your raw evaluation outputs are never committed: the tooling reads
+        them from a directory you point it at.
       </p>
       <p class="submit-cta-row">
         <a
@@ -85,20 +85,29 @@
           rel="noopener noreferrer"
         >View the pull request template</a>
       </p>
-      <p class="submit-note">
-        The repository is currently private, so the links above require access.
-        Everything the template asks for is listed below.
-      </p>
     </section>
 
     <section class="submit-section">
-      <h3>1. Write the submission file</h3>
-      <p>
-        Keep your complete <code>population_*.json</code> results in a directory
-        outside the repository, named with a stable model ID: a lowercase
-        underscore-separated slug. Use the same ID in
-        <code>leaderboard/data/submissions/&lt;model_id&gt;.json</code>:
-      </p>
+      <h3>Before you start</h3>
+      <ul class="submit-list">
+        <li>
+          Your complete <code>population_*.json</code> results, in one directory
+          outside the repository.
+        </li>
+        <li>
+          A model ID: lowercase letters, digits, and underscores, such as
+          <code>example_model</code>. Use it everywhere below.
+        </li>
+        <li>
+          A clone of the repository. Every path and command below is relative to
+          its <code>leaderboard/</code> directory.
+        </li>
+      </ul>
+    </section>
+
+    <section class="submit-section">
+      <h3>1. Describe your model</h3>
+      <p>Create <code>data/submissions/example_model.json</code>:</p>
       <pre><code>{
   "schema_version": 1,
   "model_id": "example_model",
@@ -109,66 +118,56 @@
   "coverage_note": null
 }</code></pre>
       <p>
-        <code>pretrained_on</code> must be <code>null</code> when
-        <code>pretrained</code> is <code>false</code>, and
-        <code>coverage_note</code> is either <code>null</code> or a non-empty
-        string. Unknown fields, and an ID that disagrees with the raw results,
-        are rejected.
+        Use <code>null</code> for <code>pretrained_on</code> if the model is not
+        pretrained. Leave <code>coverage_note</code> as <code>null</code> unless
+        the coverage section below applies.
       </p>
     </section>
 
     <section class="submit-section">
-      <h3>2. Add the model and validate</h3>
-      <p>From <code>leaderboard/</code>, read the dry run before it writes:</p>
+      <h3>2. Generate the artifact</h3>
       <pre><code>python add_model.py \
   --model-outputs /path/to/evaluation_outputs/example_model \
   --submission data/submissions/example_model.json \
-  --dry-run
-
-python add_model.py \
-  --model-outputs /path/to/evaluation_outputs/example_model \
-  --submission data/submissions/example_model.json
-
-python validate_data.py</code></pre>
+  --dry-run</code></pre>
       <p>
-        The dry run reports runs, logical entries, fold records, and a
-        <code>coverage: observed/expected (status)</code> line per preprocessing
-        entry. Applying it writes
-        <code>data/models/&lt;model_id&gt;.json</code> and adds it to
-        <code>data/manifest.json</code>. There is no CI check yet, so the
-        validator has to pass locally.
+        This writes nothing. Read the summary it prints, in particular the
+        <code>coverage</code> and <code>cohort</code> lines. If it looks right,
+        run the same command again without <code>--dry-run</code>. That creates
+        <code>data/models/example_model.json</code> and updates
+        <code>data/manifest.json</code>.
       </p>
     </section>
 
     <section class="submit-section">
-      <h3>3. Commit and open the pull request</h3>
-      <p>Commit exactly three files:</p>
+      <h3>3. Check, then open the pull request</h3>
+      <pre><code>python validate_data.py</code></pre>
+      <p>Commit these three files and nothing else:</p>
       <ul class="submit-list">
-        <li><code>leaderboard/data/submissions/&lt;model_id&gt;.json</code></li>
-        <li><code>leaderboard/data/models/&lt;model_id&gt;.json</code></li>
-        <li><code>leaderboard/data/manifest.json</code></li>
+        <li><code>data/submissions/example_model.json</code></li>
+        <li><code>data/models/example_model.json</code></li>
+        <li><code>data/manifest.json</code></li>
       </ul>
       <p>
-        No raw outputs, caches, or private contact metadata, and no unrelated
-        model artifact in the diff. The
-        <a
-          href="https://github.com/imindbench/imindbench.github.io/compare?expand=1&amp;template=add_model.md"
-          target="_blank"
-          rel="noopener noreferrer"
-        >template</a> asks for the submission file, the coverage line from the
-        dry run, and the model's provenance.
+        No raw outputs, no caches, no edits to another model. Open the pull
+        request with the link at the top of this page; the template asks for your
+        submission file, the coverage lines from step 2, and where the model
+        comes from. The same validator runs on your pull request.
       </p>
     </section>
 
     <section class="submit-section">
-      <h3>Partial coverage</h3>
+      <h3>Coverage</h3>
       <p>
-        Missing benchmark cells make coverage <code>partial</code> rather than
-        failing the submission. The leaderboard flags a partial model with an
-        automatic footnote counting the missing result cells and appends your
-        <code>coverage_note</code> to it, so the note can explain the gap but
-        cannot replace or suppress that text. On a complete model it is dropped
-        and never displayed.
+        Evaluate on the whole benchmark if you can. If you cannot, cover exactly
+        the <strong>Main</strong> cohort or exactly the <strong>Challenge</strong>
+        cohort, and use the same choice throughout. Any other subset is rejected;
+        step 2 tells you which one you have.
+      </p>
+      <p>
+        A cohort submission is listed with an automatic footnote about the
+        subject-sessions it skipped. Name your cohort in
+        <code>coverage_note</code> and it is added to that footnote.
       </p>
       <p class="submit-note">
         Updating a listed model, viewing the site locally, and the full schema:

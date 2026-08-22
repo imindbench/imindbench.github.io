@@ -17,6 +17,18 @@ SCHEMA_VERSION = 2
 MANIFEST_SCHEMA_VERSION = 1
 SUBMISSION_SCHEMA_VERSION = 1
 CONTRACT_SCHEMA_VERSION = 1
+PACKAGE_DIR = Path(__file__).resolve().parent
+DECODABLE_RULE = "stft_or_htnet_500hz_val_mean0p60"
+DEFAULT_DECODABLE_DIR = PACKAGE_DIR / "decodable_subject_sessions" / DECODABLE_RULE
+# A submission covers the whole benchmark or exactly one subject cohort. Any
+# other partial shape is rejected, because averages over an arbitrary subset of
+# subject-sessions cannot be compared with the other rows of the leaderboard.
+COHORT_NAMES = ("full", "main", "challenge")
+COHORT_LABELS = {
+    "full": "the full benchmark grid",
+    "main": "the Main cohort",
+    "challenge": "the Challenge cohort",
+}
 MODEL_ID_RE = re.compile(r"[a-z0-9]+(?:_[a-z0-9]+)*\Z")
 SUBJECT_SESSION_RE = re.compile(r"sub(\d+)_(?:sess|trial)(\d+)\Z")
 SUBJECT_RE = re.compile(r"sub(\d+)\Z")
@@ -548,6 +560,108 @@ def calculate_coverage(
     }
 
 
+def load_cohort_cells(
+    directory: Path, contract: dict[str, Any]
+) -> dict[str, set[tuple[Any, ...]]]:
+    """Split the contract grid into the admissible submission shapes."""
+    validate_coverage_contract(contract)
+    regime = canonicalize_regime(contract["evaluation_mode"])
+    directory = Path(directory)
+    main: set[tuple[Any, ...]] = set()
+    for dataset, spec in contract["datasets"].items():
+        path = directory / f"{dataset}.json"
+        payload = load_json(path)
+        tasks = payload.get("tasks") if isinstance(payload, dict) else None
+        if not isinstance(tasks, dict) or set(tasks) != set(spec["tasks"]):
+            raise LeaderboardDataError(
+                f"{path}: task set differs from the coverage contract"
+            )
+        allowed = set(spec["subject_sessions"])
+        for task, task_data in tasks.items():
+            sessions = (
+                task_data.get("subject_sessions")
+                if isinstance(task_data, dict)
+                else None
+            )
+            if not isinstance(sessions, list) or len(sessions) != len(set(sessions)):
+                raise LeaderboardDataError(
+                    f"{path}: {task} subject_sessions must be unique"
+                )
+            outside = sorted(set(sessions) - allowed)
+            if outside:
+                raise LeaderboardDataError(
+                    f"{path}: {task} lists subject_sessions outside the coverage "
+                    f"contract: {outside}"
+                )
+            for subject_session in sessions:
+                main.add((dataset, spec.get("subset"), regime, task, subject_session))
+    full = _expected_cells(contract)
+    return {"full": full, "main": main, "challenge": full - main}
+
+
+def _observed_cells_by_key(
+    runs: list[dict[str, Any]], records: list[dict[str, Any]]
+) -> dict[str, set[tuple[Any, ...]]]:
+    run_lookup = {run["run_id"]: run for run in runs}
+    by_key: dict[str, set[tuple[Any, ...]]] = {
+        run["model_preprocess_key"]: set() for run in runs
+    }
+    for record in records:
+        run = run_lookup.get(record["run_id"])
+        if run is None:
+            continue
+        by_key[run["model_preprocess_key"]].add(
+            (
+                record["dataset"],
+                record.get("subset"),
+                record["eval_mode"],
+                record["task"],
+                record["subject_session"],
+            )
+        )
+    return by_key
+
+
+def _describe_cohort_mismatch(
+    key: str, observed: set[tuple[Any, ...]], cohorts: dict[str, set[tuple[Any, ...]]]
+) -> str:
+    parts = []
+    for name in COHORT_NAMES:
+        cells = cohorts[name]
+        parts.append(
+            f"{COHORT_LABELS[name]} has {len(cells)} cells "
+            f"({len(cells - observed)} missing, {len(observed - cells)} outside it)"
+        )
+    return (
+        f"logical preprocessing entry {key!r} covers {len(observed)} result cells, "
+        f"which is not an admissible submission shape: {'; '.join(parts)}. "
+        "Submit the full grid, the Main cohort, or the Challenge cohort."
+    )
+
+
+def classify_coverage_cohort(
+    runs: list[dict[str, Any]],
+    records: list[dict[str, Any]],
+    cohorts: dict[str, set[tuple[Any, ...]]],
+) -> str:
+    """Return the single cohort every logical entry covers, or raise."""
+    labels: dict[str, str] = {}
+    for key, observed in sorted(_observed_cells_by_key(runs, records).items()):
+        match = next(
+            (name for name in COHORT_NAMES if observed == cohorts[name]), None
+        )
+        if match is None:
+            raise LeaderboardDataError(_describe_cohort_mismatch(key, observed, cohorts))
+        labels[key] = match
+    if len(set(labels.values())) > 1:
+        described = ", ".join(f"{key}={labels[key]}" for key in sorted(labels))
+        raise LeaderboardDataError(
+            f"logical preprocessing entries cover different cohorts ({described}); "
+            "one model must use the same cohort throughout"
+        )
+    return labels.popitem()[1]
+
+
 def describe_unexpected_result_cells(
     runs: list[dict[str, Any]], records: list[dict[str, Any]], contract: dict[str, Any]
 ) -> str:
@@ -622,6 +736,7 @@ def build_artifact(
     submission: dict[str, Any],
     extracted_records: list[dict[str, Any]],
     contract: dict[str, Any],
+    cohorts: dict[str, set[tuple[Any, ...]]],
 ) -> dict[str, Any]:
     submission = validate_submission(submission)
     model_id = submission["model_id"]
@@ -660,11 +775,15 @@ def build_artifact(
         "runs": runs,
         "records": records,
     }
-    validate_artifact(artifact, contract)
+    validate_artifact(artifact, contract, cohorts)
     return artifact
 
 
-def validate_artifact(artifact: dict[str, Any], contract: dict[str, Any]) -> None:
+def validate_artifact(
+    artifact: dict[str, Any],
+    contract: dict[str, Any],
+    cohorts: dict[str, set[tuple[Any, ...]]],
+) -> None:
     if not isinstance(artifact, dict) or set(artifact) != {
         "schema_version",
         "model",
@@ -756,6 +875,7 @@ def validate_artifact(artifact: dict[str, Any], contract: dict[str, Any]) -> Non
         )
     if artifact["coverage"] != calculated:
         raise LeaderboardDataError("stored artifact coverage does not match records")
+    classify_coverage_cohort(runs, records, cohorts)
 
 
 def make_manifest(

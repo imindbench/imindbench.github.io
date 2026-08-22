@@ -1,10 +1,3 @@
-## Model
-
-- **Model ID** (`model_id`, lowercase underscore-separated slug):
-- **Display name**:
-- **Pretrained**: yes / no
-- **Pretrained on** (`null` when not pretrained):
-
 ## Submission file
 
 Paste the contents of `leaderboard/data/submissions/<model_id>.json`:
@@ -23,18 +16,21 @@ Paste the contents of `leaderboard/data/submissions/<model_id>.json`:
 
 ## Coverage
 
-Paste the `coverage:` lines printed by the `--dry-run` report:
+Paste the `coverage:` and `cohort:` lines printed by the `--dry-run` report:
 
 ```text
 
 ```
 
-If the status is `partial`, explain the gap here and in `coverage_note`. The
-leaderboard generates its own footnote about the missing cells and appends
+A submission is expected to cover the full benchmark grid. If it cannot, the
+only accepted fallback is exactly the Main or exactly the Challenge cohort,
+using the same choice for every preprocessing entry. If this is a cohort
+submission, name the cohort in `coverage_note`.
+The leaderboard generates its own footnote about the missing cells and appends
 `coverage_note` to it; the note cannot replace that text, and it is dropped
-entirely when coverage is complete.
+entirely on a full-grid submission.
 
-## Provenance
+## Model details
 
 - **Paper / preprint**:
 - **Code**:
