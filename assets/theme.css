@@ -28,13 +28,14 @@
   --border-light: #e5e9ee;
 
   /* Masthead band: an ink field in both themes, so its foreground colors are
-     fixed here rather than following --text / --surface. */
-  --masthead: #14171c;
+     fixed here rather than following --text / --surface. Held on the accent's
+     hue so the band reads as navy rather than as a neutral black. */
+  --masthead: #131f2f;
   --masthead-text: #f5f6f8;
-  --masthead-muted: #a4a9b1;
+  --masthead-muted: #a1a9b3;
   --masthead-border: rgba(245, 246, 248, 0.2);
   --masthead-hover: rgba(245, 246, 248, 0.09);
-  --masthead-scrim: rgba(20, 23, 28, 0.86);
+  --masthead-scrim: rgba(16, 26, 35, 0.86);
   --hero-signal-rgb: 124, 176, 214;
 
   /* Always-light surface for artwork with a baked-in white background
@@ -114,8 +115,8 @@
   --border-light: #272c33;
 
   /* Sunk below the page so the band still separates from a dark body. */
-  --masthead: #0d1014;
-  --masthead-scrim: rgba(13, 16, 20, 0.86);
+  --masthead: #131f2f;
+  --masthead-scrim: rgba(10, 18, 26, 0.86);
 
   --plate: #e8eaee;
 
@@ -294,7 +295,7 @@ strong {
 /* Shared by both pages, so it lives here rather than being duplicated in
    assets/home.css and leaderboard/style.css, which are loaded one per page. */
 .site-footer {
-  margin-top: 5.5rem;
+  margin-top: 3.25rem;
   padding: 2.5rem 1.5rem;
   border-top: 1px solid var(--border);
   color: var(--text-faint);

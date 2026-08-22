@@ -122,7 +122,7 @@ html { font-size: 18px; scrollbar-gutter: stable; }
 .main-content {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0 7rem 5rem;
+  padding: 0 7rem 2.5rem;
 }
 
 /* ============================================================
@@ -176,7 +176,7 @@ html { font-size: 18px; scrollbar-gutter: stable; }
   flex-wrap: wrap;
   gap: 0.9rem 1.15rem;
   align-items: flex-end;
-  padding: 2rem 0 1rem;
+  padding: 1rem 0 0.75rem;
 }
 
 .filter-group {
@@ -280,41 +280,42 @@ html { font-size: 18px; scrollbar-gutter: stable; }
 }
 
 /* ============================================================
-   SUMMARY CARDS
+   SUMMARY BAR
    ============================================================ */
 
-.summary-cards {
+.summary-bar {
   display: flex;
-  gap: 0.85rem;
   flex-wrap: wrap;
-  margin: 1.6rem 0 2rem;
-}
-
-.card {
+  align-items: baseline;
+  padding: 0.55rem 1.15rem;
+  margin: 0 0 1rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 0.9rem 1.4rem;
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  gap: 0.7rem;
-  min-width: 110px;
 }
 
-.card-value {
-  font-size: 1.4rem;
+.summary-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.1rem 1.15rem;
+}
+
+.summary-stat:first-child { padding-left: 0; }
+.summary-stat + .summary-stat { border-left: 1px solid var(--border); }
+
+.summary-value {
+  font-size: 1.15rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
   color: var(--accent);
-  line-height: 1;
+  line-height: 1.2;
 }
 
-.card-label {
+.summary-label {
   font-size: 0.82rem;
   color: var(--text-muted);
-  line-height: 1;
 }
 
 /* ============================================================
@@ -1085,12 +1086,12 @@ html { font-size: 18px; scrollbar-gutter: stable; }
    ============================================================ */
 
 @media (max-width: 1024px) {
-  .main-content { padding: 0 3rem 4rem; }
+  .main-content { padding: 0 3rem 2rem; }
   .header-inner { padding: 0 3rem; }
 }
 
 @media (max-width: 768px) {
-  .main-content { padding: 0 1rem 3rem; }
+  .main-content { padding: 0 1rem 1.75rem; }
   .header-inner {
     align-items: flex-start;
     flex-direction: column;
@@ -1098,10 +1099,10 @@ html { font-size: 18px; scrollbar-gutter: stable; }
     padding: 0 1rem;
   }
   .site-title { font-size: 1.3rem; }
-  .summary-cards { gap: 0.5rem; }
-  .card { min-width: 90px; padding: 0.6rem 1rem; }
-  .card-value { font-size: 1.25rem; }
   .filter-bar { gap: 0.6rem 1rem; }
+  .summary-bar { padding: 0.45rem 0.8rem; }
+  .summary-stat { padding: 0.1rem 0.7rem; }
+  .summary-value { font-size: 1.05rem; }
   .modal-card { padding: 1.25rem 1.25rem; }
   .run-config-summary { grid-template-columns: minmax(0, 1fr) 1rem; }
   .run-config-datasets {
