@@ -1,102 +1,35 @@
 # iMINDBench Leaderboard
 
+Checked-in data, the browser app, and the tooling that validates both. Raw
+evaluation outputs live outside this directory; every command that reads them
+takes an explicit external path.
 
-## View the leaderboard locally
+## View it locally
 
-Use the local server, which serves only files contained in this `leaderboard/`
-directory:
-
-```bash
-cd examples/neuroprobe_eval/leaderboard
-python serve.py --port 8080
-```
-
-Then open <http://localhost:8080>.
-
-## Validate the checked-in data
-
-Run the validator before submitting a leaderboard change:
+Serve the repository root, not this directory: the pages load the shared theme
+from `../assets/`.
 
 ```bash
-cd examples/neuroprobe_eval/leaderboard
-python validate_data.py
+python3 -m http.server 8899 --bind 127.0.0.1
 ```
 
-Validation uses only checked-in files. It checks the manifest, every visible or
-unpublished model
-artifact, run references, record uniqueness, the benchmark coverage contract,
-and the decodable-subject manifests. It does not require raw evaluation outputs.
-CI runs this same validation, so a local success should match the repository
-check.
-
-## Generate the baseline
-
-Regenerate all baseline model artifacts from an explicitly supplied external
-raw-output directory:
-
-```bash
-cd examples/neuroprobe_eval/leaderboard
-python generate_data.py \
-  --outputs-dir /path/to/jul21_arxiv_leaderboard
-```
-
-`--outputs-dir` is required; the leaderboard does not assume a sibling
-`outputs/` directory. The checked-in destination defaults are:
-
-```text
---models-dir data/models
---manifest data/manifest.json
---coverage-contract data/coverage_contract.json
---submissions-dir data/baseline_submissions
---submissions-dir data/submissions
-```
-
-The external raw baseline directory is never copied into the leaderboard.
-Generation partitions it by model, validates all proposed artifacts before
-writing, and does not remove checked-in models that are absent from the input.
-
-Preview a regeneration without changing files:
-
-```bash
-python generate_data.py \
-  --outputs-dir /path/to/jul21_arxiv_leaderboard \
-  --dry-run
-```
-
-If a generated artifact differs from an existing artifact, the command stops
-without writing. After reviewing the reported changes, explicitly authorize the
-replacement with:
-
-```bash
-python generate_data.py \
-  --outputs-dir /path/to/jul21_arxiv_leaderboard \
-  --overwrite
-```
-
-You can combine `--dry-run --overwrite` to preview what an authorized replacement
-would do. Custom source and destination paths can be supplied with the options
-shown above.
+Then open <http://localhost:8899/leaderboard/>.
 
 ## Add a model
 
-Keep raw evaluation outputs outside `leaderboard/`. Replace `example_model` with
-the same stable model ID in the external output directory and both checked-in
-files:
+Give the model a stable ID: a lowercase underscore-separated slug used for the
+external output directory and both checked-in files.
 
 ```text
 /path/to/evaluation_outputs/
   example_model/                      # external population_*.json results
 
-leaderboard/
-  data/
-    submissions/
-      example_model.json              # public model metadata you create
-    models/
-      example_model.json              # generated publication artifact
+leaderboard/data/
+  submissions/example_model.json      # public metadata you write
+  models/example_model.json           # generated publication artifact
 ```
 
-Place the complete raw evaluation output in an external directory, then create
-`data/submissions/example_model.json`:
+Write `data/submissions/example_model.json`:
 
 ```json
 {
@@ -110,131 +43,145 @@ Place the complete raw evaluation output in an external directory, then create
 }
 ```
 
-`model_id` must be a stable lowercase underscore-separated slug. Set
-`pretrained_on` to `null` when `pretrained` is `false`. Unknown fields and a model
-ID that disagrees with the raw results are rejected.
+`pretrained_on` must be `null` when `pretrained` is `false`, and
+`coverage_note` is either `null` or a non-empty string. Unknown fields, and a
+model ID that disagrees with the raw results, are rejected.
 
-Preview the submission first:
+Preview, apply, then validate, all from `leaderboard/`:
 
 ```bash
-cd examples/neuroprobe_eval/leaderboard
 python add_model.py \
   --model-outputs /path/to/evaluation_outputs/example_model \
   --submission data/submissions/example_model.json \
   --dry-run
-```
 
-The report includes physical run configurations, logical leaderboard entries,
-unique result cells, fold records, and missing coverage by dataset. The coverage
-grid comes from `data/coverage_contract.json`; it is not inferred from other
-models.
-
-Add the model after reviewing the report:
-
-```bash
 python add_model.py \
   --model-outputs /path/to/evaluation_outputs/example_model \
   --submission data/submissions/example_model.json
+
+python validate_data.py
 ```
 
-This creates `data/models/example_model.json` and adds its sorted path to
-`data/manifest.json`. Re-running with identical inputs is an unchanged no-op.
-Entries under `unpublished_models` are validated but are not loaded by the browser.
+The dry run reports physical run configurations, logical leaderboard entries,
+fold records, and a `coverage: observed/expected (status)` line per
+preprocessing entry, with missing cells broken down by dataset. Its coverage
+grid comes from `data/coverage_contract.json` and is never inferred from other
+models.
 
-## Update an existing model
+Applying writes `data/models/example_model.json` and adds its sorted path to
+`data/manifest.json`. Re-running with identical inputs is a no-op. Paths listed
+under `unpublished_models` are validated but not loaded by the browser.
 
-An existing artifact is never replaced implicitly. Preview the complete
-replacement and its before/after summary:
-
-```bash
-python add_model.py \
-  --model-outputs /path/to/evaluation_outputs/example_model \
-  --submission data/submissions/example_model.json \
-  --dry-run \
-  --overwrite
-```
-
-Then apply it explicitly:
-
-```bash
-python add_model.py \
-  --model-outputs /path/to/evaluation_outputs/example_model \
-  --submission data/submissions/example_model.json \
-  --overwrite
-```
-
-The supplied output directory is the model's complete intended submission, not
-a partial patch. A differing existing artifact fails without `--overwrite`, and
-`--dry-run` never writes.
-
-## Coverage behavior
-
-Coverage is computed separately for each logical preprocessing entry. A complete
-entry contains the expected tasks, subject/session cells, and fold indices for
-all benchmark datasets.
-
-Partial coverage is allowed. It is stored as `coverage.status: "partial"` and is
-shown automatically in the browser. An optional `coverage_note` may explain the
-gap, but it cannot hide or override computed partial status.
-
-Missing benchmark cells make coverage partial; they do not make the command
-fail. Malformed records, duplicate cells or folds, missing expected fold indices,
-unexpected benchmark cells, and a stored coverage summary that disagrees with
-the records are validation errors.
-
-## Files to commit
-
-For a new model, commit:
+Commit exactly three files:
 
 - `data/submissions/<model_id>.json`
 - `data/models/<model_id>.json`
 - `data/manifest.json`
 
-For an update to an already-listed model, normally only
-`data/models/<model_id>.json` changes. Commit `data/coverage_contract.json` only
-when intentionally changing the reviewed benchmark definition, and commit
-decodable-subject manifests only when intentionally updating their authoritative
-filters or rooflines.
+Never commit raw evaluation outputs, caches, temporary files, or private
+author and contact metadata, and check the diff for unrelated model artifacts.
+Change `data/coverage_contract.json` only when intentionally revising the
+reviewed benchmark definition, and the decodable-subject manifests only when
+intentionally updating their filters or rooflines.
 
-Do not copy raw evaluation outputs into `leaderboard/`, and do not commit
-temporary files, generated caches, or private author/contact metadata. Before
-opening a change, run `python validate_data.py` and inspect the Git diff to
-confirm that no unrelated model artifact changed.
+Then open a pull request with the
+[submission template](../.github/PULL_REQUEST_TEMPLATE/add_model.md). The
+public version of these instructions is [`submit.html`](submit.html).
 
+## Update a listed model
+
+An existing artifact is never replaced implicitly. The supplied output
+directory is the model's complete intended submission, not a partial patch.
+
+```bash
+python add_model.py \
+  --model-outputs /path/to/evaluation_outputs/example_model \
+  --submission data/submissions/example_model.json \
+  --dry-run --overwrite
+```
+
+Review the before/after summary, then drop `--dry-run` to apply it. A differing
+existing artifact fails without `--overwrite`; `--dry-run` never writes. For an
+update, normally only `data/models/<model_id>.json` changes.
+
+## Validate
+
+```bash
+python validate_data.py
+```
+
+Checks the manifest, every visible and unpublished artifact, run references,
+record uniqueness, the benchmark coverage contract, and the decodable-subject
+manifests, using only checked-in files. There is no CI check yet, so run it
+before opening a pull request.
+
+## Coverage behavior
+
+Coverage is computed separately for each logical preprocessing entry. A
+complete entry contains the expected tasks, subject/session cells, and fold
+indices for all benchmark datasets.
+
+Missing benchmark cells make coverage `partial`; they do not fail the command.
+The browser then shows an automatic footnote counting the missing result cells
+and appends `coverage_note` to it, so the note can explain a gap but cannot
+replace or suppress the generated text. On a complete model the note is dropped
+and never displayed.
+
+Malformed records, duplicate cells or folds, missing expected fold indices,
+unexpected benchmark cells, and a stored coverage summary that disagrees with
+the records are all validation errors.
 
 ## Main vs Challenge subjects
 
 The **Subjects** filter splits subject-sessions into `Main` (decodable) and
-`Challenge` (not decodable). The leaderboard uses one fixed decodability rule:
-`max(STFT, HTNet 500Hz)` mean validation ROC-AUC greater than 0.60. Its
-per-dataset manifests are checked in under
-`decodable_subject_sessions/stft_or_htnet_500hz_val_mean0p60/`.
-
-The cohort cannot be selected in the UI or overridden through a URL query
-parameter. Changing the authoritative rule requires updating the in-folder
-manifests together with the corresponding loader, validator, and documentation.
+`Challenge` (not decodable) using one fixed rule: `max(STFT, HTNet 500Hz)` mean
+validation ROC-AUC greater than 0.60. The per-dataset manifests are checked in
+under `decodable_subject_sessions/stft_or_htnet_500hz_val_mean0p60/`.
 
 Only `subject_sessions` and `n_subject_sessions` are required per task; the
 roofline fields (`mean_test_roc_auc`, `max_test_roc_auc`) are optional and the
 validation-based manifests omit them.
 
-## Self-contained layout
+The cohort cannot be selected in the UI or through a URL parameter. Changing
+the authoritative rule means updating the in-folder manifests together with the
+loader, the validator, and this document.
 
-All files needed to serve, view, and validate the checked-in leaderboard live
-under `leaderboard/`:
+## Regenerate the baseline
+
+Rebuild all baseline artifacts from an external raw-output directory.
+`--outputs-dir` is required; no sibling `outputs/` directory is assumed.
+
+```bash
+python generate_data.py --outputs-dir /path/to/jul21_arxiv_leaderboard --dry-run
+```
+
+Destinations default to `data/models`, `data/manifest.json`,
+`data/coverage_contract.json`, and two submission sources
+(`data/baseline_submissions` and `data/submissions`, overridable with repeated
+`--submissions-dir` flags).
+
+Generation partitions the input by model, validates every proposed artifact
+before writing, and leaves checked-in models absent from the input alone. If a
+generated artifact differs from an existing one the command stops; re-run with
+`--overwrite` to authorize the replacement, optionally with `--dry-run` first.
+The external directory is never copied into `leaderboard/`.
+
+## Layout
 
 ```text
 leaderboard/
+  index.html                         # the leaderboard app
+  submit.html                        # public submission guide
   app.js
-  index.html
   style.css
-  serve.py
+  add_model.py                       # add or update one model
+  generate_data.py                   # rebuild all baseline artifacts
   validate_data.py
-  data/                              # manifest, contracts, submissions, models
+  leaderboard_data.py                # shared schema and validation
+  data/                              # manifest, contract, submissions, models
   decodable_subject_sessions/
     stft_or_htnet_500hz_val_mean0p60/
 ```
 
-Raw evaluation results are intentionally not part of this layout. Commands that
-ingest them require an explicit external path: `generate_data.py --outputs-dir`
-and `add_model.py --model-outputs`.
+Both pages also load `../assets/theme.css` and `../assets/theme.js`, the design
+tokens shared with the homepage.

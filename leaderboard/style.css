@@ -959,12 +959,12 @@ html { font-size: 18px; scrollbar-gutter: stable; }
    SUBMIT PAGE
    ============================================================ */
 
-/* submit.html is prose on the leaderboard chrome, so it needs a measure and
-   heading rhythm that the table page has no use for. */
-/* Margin rather than padding-top: the responsive rules below reset the
+/* submit.html is prose on the leaderboard chrome, so it needs a heading rhythm
+   that the table page has no use for. It keeps .main-content's width so the
+   text lines up with the table and the masthead.
+   Margin rather than padding-top: the responsive rules below reset the
    .main-content padding shorthand. */
 .submit-page {
-  max-width: 46rem;
   margin-top: 3rem;
 }
 
