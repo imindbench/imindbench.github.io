@@ -1,0 +1,326 @@
+/* ============================================================
+   iMINDBench — design system
+   Tokens, base typography, and shared controls for both pages.
+   This sheet loads after each page stylesheet, so the tokens and
+   base rules here are the authoritative ones.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* --- Type --- */
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  --tracking-label: 0.09em;
+
+  /* --- Geometry --- */
+  --radius: 4px;
+  --radius-lg: 6px;
+
+  /* --- Ink & paper: neutrals carry a slight blue cast so they sit in the same
+     family as the accent rather than reading as a warm grey beside it. --- */
+  --background: #f1f3f5;
+  --surface: #fafbfc;
+  --text: #181b1f;
+  --text-muted: #575f68;
+  --text-faint: #878d95;
+  --border: #d7dbe0;
+  --border-light: #e5e9ee;
+
+  /* Masthead band: an ink field in both themes, so its foreground colors are
+     fixed here rather than following --text / --surface. Held on the accent's
+     hue so the band reads as navy rather than as a neutral black. */
+  --masthead: #131f2f;
+  --masthead-text: #f5f6f8;
+  --masthead-muted: #a1a9b3;
+  --masthead-border: rgba(245, 246, 248, 0.2);
+  --masthead-hover: rgba(245, 246, 248, 0.09);
+  --masthead-scrim: rgba(16, 26, 35, 0.86);
+  --hero-signal-rgb: 124, 176, 214;
+
+  /* Always-light surface for artwork with a baked-in white background
+     (figures). Dimmed rather than pure white in dark mode. */
+  --plate: #ffffff;
+
+  /* --- Accent: steel blue --- */
+  --accent: #1d4e6e;
+  --accent-dark: #143a53;
+  --accent-light: #e2eaf1;
+  --accent-contrast: #fafbfc;
+
+  /* --- Data surfaces --- */
+  --row-alt: #f6f8fa;
+  --row-hover: #e4edf5;
+  --best: #d8e5f0;
+  --best-text: #1e3d56;
+  /* Kept green: these read as status rather than as part of the accent
+     family, so they stay distinguishable from the blue data surfaces. */
+  --positive: #2f6b3d;
+  --warn: #9c4a2f;
+  /* Leaderboard heat ramp. app.js emits a 0-1 position and the alpha range is
+     set here, because opacity works in opposite directions per theme: over a
+     light row it darkens the cell, over a dark row it lightens it. A shared
+     range would therefore have to trade one theme off against the other. */
+  --heat-rgb: 66, 139, 208;
+  --heat-alpha-min: 0.03;
+  --heat-alpha-span: 0.47;
+
+  /* Chart ink. The per-task and per-subject SVGs are built in app.js, which
+     tags their elements with classes so the charts re-theme through CSS alone
+     and never have to be redrawn on a theme toggle. */
+  --chart-grid: #e9ecef;
+  --chart-axis: #c8ccd2;
+  --chart-chance: #b6bbc2;
+  --chart-roofline: #676e77;
+  --chart-tick: #575f68;
+  --chart-tick-muted: #878d95;
+  --chart-label: #424952;
+  --chart-se: #424952;
+  --chart-avg-bg: #eef2f7;
+  --chart-avg-grid: #dee4ea;
+  --chart-divider: #d0d5dd;
+
+  /* Rank badges: metal tints, kept desaturated so they read as data,
+     not as decoration. */
+  --rank-1-bg: #e9d9a6;
+  --rank-1-text: #5a4310;
+  --rank-1-rule: #c9a94f;
+  --rank-2-bg: #dcdee2;
+  --rank-2-text: #424952;
+  --rank-3-bg: #e6cdb6;
+  --rank-3-text: #6d3f1d;
+  --rank-3-rule: #b7794a;
+
+  /* Track badges */
+  --track-stft-bg: #dde6ea;
+  --track-stft-text: #1f4a5c;
+  --track-wav-bg: #ece2cf;
+  --track-wav-text: #6a4a12;
+  --track-other-bg: #e4dee9;
+  --track-other-text: #4e3a63;
+
+  /* --- Elevation: hairlines do most of the work here --- */
+  --shadow-md: 0 4px 14px rgba(20, 26, 36, 0.07);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --background: #16191d;
+  --surface: #1e2228;
+  --text: #e9ecf0;
+  --text-muted: #a6acb4;
+  --text-faint: #7f858d;
+  --border: #333941;
+  --border-light: #272c33;
+
+  /* Sunk below the page so the band still separates from a dark body. */
+  --masthead: #131f2f;
+  --masthead-scrim: rgba(10, 18, 26, 0.86);
+
+  --plate: #e8eaee;
+
+  --accent: #7fb3d6;
+  --accent-dark: #a3cbe6;
+  --accent-light: #1c2f3d;
+  --accent-contrast: #101e29;
+
+  --row-alt: #1a1e23;
+  --row-hover: #1f2d3a;
+  --best: #23384c;
+  --best-text: #c2d8ea;
+  --positive: #7cb98c;
+  --warn: #dd917a;
+  /* More saturated and darker than the light-mode ramp: here opacity lightens
+     the cell, so the top of the scale has to stay dark enough for light text. */
+  --heat-rgb: 35, 136, 219;
+  --heat-alpha-min: 0.07;
+  --heat-alpha-span: 0.55;
+
+  --chart-grid: #2a2e34;
+  --chart-axis: #474d55;
+  --chart-chance: #5b616a;
+  --chart-roofline: #98a0a9;
+  --chart-tick: #a6acb4;
+  --chart-tick-muted: #878d95;
+  --chart-label: #ced3d9;
+  --chart-se: #c9ced5;
+  --chart-avg-bg: #212730;
+  --chart-avg-grid: #2f3640;
+  --chart-divider: #404751;
+
+  --rank-1-bg: #4a3d19;
+  --rank-1-text: #edd9a2;
+  --rank-1-rule: #b08f3d;
+  --rank-2-bg: #32353b;
+  --rank-2-text: #d3d6dc;
+  --rank-3-bg: #46301f;
+  --rank-3-text: #e8c1a1;
+  --rank-3-rule: #9c6a41;
+
+  --track-stft-bg: #1f3138;
+  --track-stft-text: #a5c8d6;
+  --track-wav-bg: #37301f;
+  --track-wav-text: #dcc38b;
+  --track-other-bg: #302939;
+  --track-other-text: #c3b0d8;
+
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.34);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: var(--background);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--accent-dark);
+}
+
+strong {
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent-light);
+  color: var(--text);
+}
+
+/* ============================================================
+   THEME TOGGLE
+   ============================================================ */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 2.35rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  background: var(--surface);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.theme-toggle svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+/* Inside the masthead the toggle sits on ink in both themes. */
+.site-header .theme-toggle {
+  border-color: var(--masthead-border);
+  color: var(--masthead-muted);
+  background: var(--masthead-scrim);
+}
+
+.site-header .theme-toggle:hover {
+  border-color: var(--masthead-text);
+  color: var(--masthead-text);
+  background: var(--masthead-hover);
+}
+
+.site-header .theme-toggle:focus-visible {
+  outline-color: var(--masthead-text);
+}
+
+.theme-icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-icon-moon {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+/* Shared by both pages, so it lives here rather than being duplicated in
+   assets/home.css and leaderboard/style.css, which are loaded one per page. */
+.site-footer {
+  margin-top: 3.25rem;
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+  background: var(--surface);
+  font-size: 0.76rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem 1.15rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}

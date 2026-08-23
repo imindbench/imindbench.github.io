@@ -308,17 +308,21 @@ function renderTable(filteredRecords, metadata) {
     worstByCol[ds] = vals.length ? Math.min.apply(null, vals) : null;
   }
 
-  // Returns a CSS background color interpolated dark-green → yellow-green for t in [0,1]
-  // t=1 → best (dark green), t=0 → worst (light yellow-green)
+  // Sequential single-hue ramp. This emits only the 0-1 position on the scale
+  // and leaves the hue and the alpha range to --heat-* in theme.css, so the
+  // cells composite over whichever row background the active theme supplies
+  // and re-theme on toggle without the table being rebuilt.
+  //
+  // Scores in a column often sit within a few points of each other, so the
+  // exponent pushes the mid-range apart, which is where entries bunch up.
   function heatColor(v, colMin, colMax) {
     if (v == null || colMin == null || colMax == null || colMin === colMax) return "";
     var t = (v - colMin) / (colMax - colMin); // 0=worst, 1=best
-    // dark green rgb(60, 185, 78) → light yellow-green #d4f0a0
-    var r = Math.round(60  + (212 - 60)  * (1 - t));
-    var g = Math.round(185 + (240 - 185) * (1 - t));
-    var b = Math.round(78  + (160 - 78)  * (1 - t));
-    var alpha = 0.18 + 0.52 * t; // more opaque for better values
-    return 'background:rgba(' + r + ',' + g + ',' + b + ',' + alpha.toFixed(2) + ')';
+    var pos = Math.pow(t, 0.82).toFixed(3);
+    return (
+      "background:rgba(var(--heat-rgb),calc(var(--heat-alpha-min) + " +
+      "var(--heat-alpha-span) * " + pos + "))"
+    );
   }
 
   const metricLabel = state.metric === "roc_auc" ? "ROC-AUC" : "Accuracy";
@@ -758,13 +762,13 @@ function buildChartSection(dataset, records, allFilteredRecords, metadata, roofl
   for (var gv = yMin; gv <= yMax + 1e-9; gv = Math.round((gv + 0.1) * 10) / 10) gridValues.push(gv);
   gridValues.forEach(function(gval) {
     var gy = yScale(gval);
-    svgParts.push('<line x1="0" y1="' + gy + '" x2="' + innerW + '" y2="' + gy + '" stroke="#eee" stroke-width="0.75"/>');
+    svgParts.push('<line x1="0" y1="' + gy + '" x2="' + innerW + '" y2="' + gy + '" class="chart-grid" stroke-width="0.75"/>');
   });
 
   // Chance line
   if (yMin <= 0.5) {
     var cy = yScale(0.5);
-    svgParts.push('<line x1="0" y1="' + cy + '" x2="' + innerW + '" y2="' + cy + '" stroke="#c0c0c0" stroke-width="1.5" stroke-dasharray="3,4"/>');
+    svgParts.push('<line x1="0" y1="' + cy + '" x2="' + innerW + '" y2="' + cy + '" class="chart-chance" stroke-width="1.5" stroke-dasharray="3,4"/>');
   }
 
   // Bars
@@ -776,7 +780,7 @@ function buildChartSection(dataset, records, allFilteredRecords, metadata, roofl
         var ry = yScale(Math.min(Math.max(roofVal, yMin), yMax));
         var rx0 = barX(ti, 0, false);
         var rx1 = barX(ti, nModels - 1, false) + barW;
-        svgParts.push('<line x1="' + rx0 + '" y1="' + ry + '" x2="' + rx1 + '" y2="' + ry + '" stroke="#666" stroke-width="1.5" stroke-dasharray="4,3"/>');
+        svgParts.push('<line x1="' + rx0 + '" y1="' + ry + '" x2="' + rx1 + '" y2="' + ry + '" class="chart-roofline" stroke-width="1.5" stroke-dasharray="4,3"/>');
       }
     }
 
@@ -794,16 +798,16 @@ function buildChartSection(dataset, records, allFilteredRecords, metadata, roofl
   });
 
   // X axis line
-  svgParts.push('<line x1="0" y1="' + innerH + '" x2="' + innerW + '" y2="' + innerH + '" stroke="#ccc" stroke-width="1"/>');
+  svgParts.push('<line x1="0" y1="' + innerH + '" x2="' + innerW + '" y2="' + innerH + '" class="chart-axis" stroke-width="1"/>');
 
   // Task x-axis labels — centered when there is room, tilted when narrow.
   activeTasks.forEach(function(task, ti) {
     var disp = taskDisplayNames[task] || task;
     var cx = (ti * groupW + groupW / 2).toFixed(1);
     if (tiltLabels) {
-      svgParts.push('<text transform="translate(' + cx + ',' + (innerH + 12) + ') rotate(40)" font-size="13" fill="#666" text-anchor="start" font-family="-apple-system,sans-serif">' + escSvg(disp) + '</text>');
+      svgParts.push('<text transform="translate(' + cx + ',' + (innerH + 12) + ') rotate(40)" font-size="13" class="chart-tick" text-anchor="start" font-family="-apple-system,sans-serif">' + escSvg(disp) + '</text>');
     } else {
-      svgParts.push('<text x="' + cx + '" y="' + (innerH + 20) + '" font-size="13" fill="#666" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(disp) + '</text>');
+      svgParts.push('<text x="' + cx + '" y="' + (innerH + 20) + '" font-size="13" class="chart-tick" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(disp) + '</text>');
     }
   });
 
@@ -811,9 +815,9 @@ function buildChartSection(dataset, records, allFilteredRecords, metadata, roofl
   if (!showAvg) {
     gridValues.forEach(function(gval) {
       var gy = yScale(gval);
-      svgParts.push('<text x="-8" y="' + (gy + 4) + '" font-size="12" fill="#888" text-anchor="end" font-family="-apple-system,sans-serif">' + gval.toFixed(1) + '</text>');
+      svgParts.push('<text x="-8" y="' + (gy + 4) + '" font-size="12" class="chart-tick-y" text-anchor="end" font-family="-apple-system,sans-serif">' + gval.toFixed(1) + '</text>');
     });
-    svgParts.push('<text transform="rotate(-90)" x="' + (-innerH / 2) + '" y="-46" font-size="13" fill="#888" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(metricLabel) + '</text>');
+    svgParts.push('<text transform="rotate(-90)" x="' + (-innerH / 2) + '" y="-46" font-size="13" class="chart-tick-y" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(metricLabel) + '</text>');
   }
 
   svgParts.push("</g></svg>");
@@ -826,21 +830,21 @@ function buildChartSection(dataset, records, allFilteredRecords, metadata, roofl
     avgSvgParts.push('<g transform="translate(' + CHART.marginLeft + ',' + CHART.marginTop + ')">');
 
     // Background shading
-    avgSvgParts.push('<rect x="0" y="0" width="' + avgInnerW + '" height="' + innerH + '" fill="#f0f4f9" rx="3"/>');
+    avgSvgParts.push('<rect x="0" y="0" width="' + avgInnerW + '" height="' + innerH + '" class="chart-avg-bg" rx="3"/>');
 
     // Grid lines + Y axis labels (Y axis lives here, fixed)
     gridValues.forEach(function(gval) {
       var gy = yScale(gval);
-      avgSvgParts.push('<line x1="0" y1="' + gy + '" x2="' + avgInnerW + '" y2="' + gy + '" stroke="#e0e4ea" stroke-width="0.75"/>');
-      avgSvgParts.push('<text x="-8" y="' + (gy + 4) + '" font-size="12" fill="#888" text-anchor="end" font-family="-apple-system,sans-serif">' + gval.toFixed(1) + '</text>');
+      avgSvgParts.push('<line x1="0" y1="' + gy + '" x2="' + avgInnerW + '" y2="' + gy + '" class="chart-avg-grid" stroke-width="0.75"/>');
+      avgSvgParts.push('<text x="-8" y="' + (gy + 4) + '" font-size="12" class="chart-tick-y" text-anchor="end" font-family="-apple-system,sans-serif">' + gval.toFixed(1) + '</text>');
     });
     // Metric axis title (rotated)
-    avgSvgParts.push('<text transform="rotate(-90)" x="' + (-innerH / 2) + '" y="-46" font-size="13" fill="#888" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(metricLabel) + '</text>');
+    avgSvgParts.push('<text transform="rotate(-90)" x="' + (-innerH / 2) + '" y="-46" font-size="13" class="chart-tick-y" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(metricLabel) + '</text>');
 
     // Chance line
     if (yMin <= 0.5) {
       var avgCy = yScale(0.5);
-      avgSvgParts.push('<line x1="0" y1="' + avgCy + '" x2="' + avgInnerW + '" y2="' + avgCy + '" stroke="#c0c0c0" stroke-width="1.5" stroke-dasharray="3,4"/>');
+      avgSvgParts.push('<line x1="0" y1="' + avgCy + '" x2="' + avgInnerW + '" y2="' + avgCy + '" class="chart-chance" stroke-width="1.5" stroke-dasharray="3,4"/>');
     }
 
     // Avg bars
@@ -857,14 +861,14 @@ function buildChartSection(dataset, records, allFilteredRecords, metadata, roofl
     });
 
     // X axis line
-    avgSvgParts.push('<line x1="0" y1="' + innerH + '" x2="' + avgInnerW + '" y2="' + innerH + '" stroke="#ccc" stroke-width="1"/>');
+    avgSvgParts.push('<line x1="0" y1="' + innerH + '" x2="' + avgInnerW + '" y2="' + innerH + '" class="chart-axis" stroke-width="1"/>');
 
     // "Average" label
     var lx = (avgInnerW / 2).toFixed(1);
-    avgSvgParts.push('<text x="' + lx + '" y="' + (innerH + 20) + '" font-size="13" fill="#444" font-weight="600" text-anchor="middle" font-family="-apple-system,sans-serif">Average</text>');
+    avgSvgParts.push('<text x="' + lx + '" y="' + (innerH + 20) + '" font-size="13" class="chart-label" font-weight="600" text-anchor="middle" font-family="-apple-system,sans-serif">Average</text>');
 
     // Divider line (right edge)
-    avgSvgParts.push('<line x1="' + avgInnerW + '" y1="-' + CHART.marginTop + '" x2="' + avgInnerW + '" y2="' + innerH + '" stroke="#d0d5dd" stroke-width="1.5" stroke-dasharray="4,3"/>');
+    avgSvgParts.push('<line x1="' + avgInnerW + '" y1="-' + CHART.marginTop + '" x2="' + avgInnerW + '" y2="' + innerH + '" class="chart-divider" stroke-width="1.5" stroke-dasharray="4,3"/>');
 
     avgSvgParts.push("</g></svg>");
   }
@@ -1058,11 +1062,11 @@ function buildSubjectChartSection(dataset, records, metadata, metric, metricLabe
   for (var gv = yMin; gv <= yMax + 1e-9; gv = Math.round((gv + 0.1) * 10) / 10) gridValues.push(gv);
   gridValues.forEach(function(gval) {
     var gy = yScale(gval);
-    svgParts.push('<line x1="0" y1="' + gy + '" x2="' + innerW + '" y2="' + gy + '" stroke="#eee" stroke-width="0.75"/>');
+    svgParts.push('<line x1="0" y1="' + gy + '" x2="' + innerW + '" y2="' + gy + '" class="chart-grid" stroke-width="0.75"/>');
   });
   if (yMin <= 0.5) {
     var cy = yScale(0.5);
-    svgParts.push('<line x1="0" y1="' + cy + '" x2="' + innerW + '" y2="' + cy + '" stroke="#c0c0c0" stroke-width="1.5" stroke-dasharray="3,4"/>');
+    svgParts.push('<line x1="0" y1="' + cy + '" x2="' + innerW + '" y2="' + cy + '" class="chart-chance" stroke-width="1.5" stroke-dasharray="3,4"/>');
   }
 
   subjects.forEach(function(sid, si) {
@@ -1080,22 +1084,22 @@ function buildSubjectChartSection(dataset, records, metadata, metric, metricLabe
     });
   });
 
-  svgParts.push('<line x1="0" y1="' + innerH + '" x2="' + innerW + '" y2="' + innerH + '" stroke="#ccc" stroke-width="1"/>');
+  svgParts.push('<line x1="0" y1="' + innerH + '" x2="' + innerW + '" y2="' + innerH + '" class="chart-axis" stroke-width="1"/>');
   subjects.forEach(function(sid, si) {
     var disp = subjectLabel(sid);
     var cx = (si * groupW + groupW / 2).toFixed(1);
     if (tiltLabels) {
-      svgParts.push('<text transform="translate(' + cx + ',' + (innerH + 12) + ') rotate(40)" font-size="13" fill="#666" text-anchor="start" font-family="-apple-system,sans-serif">' + escSvg(disp) + '</text>');
+      svgParts.push('<text transform="translate(' + cx + ',' + (innerH + 12) + ') rotate(40)" font-size="13" class="chart-tick" text-anchor="start" font-family="-apple-system,sans-serif">' + escSvg(disp) + '</text>');
     } else {
-      svgParts.push('<text x="' + cx + '" y="' + (innerH + 20) + '" font-size="13" fill="#666" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(disp) + '</text>');
+      svgParts.push('<text x="' + cx + '" y="' + (innerH + 20) + '" font-size="13" class="chart-tick" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(disp) + '</text>');
     }
   });
   if (!showAvg) {
     gridValues.forEach(function(gval) {
       var gy = yScale(gval);
-      svgParts.push('<text x="-8" y="' + (gy + 4) + '" font-size="12" fill="#888" text-anchor="end" font-family="-apple-system,sans-serif">' + gval.toFixed(1) + '</text>');
+      svgParts.push('<text x="-8" y="' + (gy + 4) + '" font-size="12" class="chart-tick-y" text-anchor="end" font-family="-apple-system,sans-serif">' + gval.toFixed(1) + '</text>');
     });
-    svgParts.push('<text transform="rotate(-90)" x="' + (-innerH / 2) + '" y="-46" font-size="13" fill="#888" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(metricLabel) + '</text>');
+    svgParts.push('<text transform="rotate(-90)" x="' + (-innerH / 2) + '" y="-46" font-size="13" class="chart-tick-y" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(metricLabel) + '</text>');
   }
   svgParts.push("</g></svg>");
 
@@ -1105,16 +1109,16 @@ function buildSubjectChartSection(dataset, records, metadata, metric, metricLabe
     avgSvgParts.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + avgPanelW + '" height="' + CHART.height + '" style="display:block;width:' + avgPanelW + 'px;height:' + CHART.height + 'px">');
     avgSvgParts.push(hatchDefs(avgSvgId));
     avgSvgParts.push('<g transform="translate(' + CHART.marginLeft + ',' + CHART.marginTop + ')">');
-    avgSvgParts.push('<rect x="0" y="0" width="' + avgInnerW + '" height="' + innerH + '" fill="#f0f4f9" rx="3"/>');
+    avgSvgParts.push('<rect x="0" y="0" width="' + avgInnerW + '" height="' + innerH + '" class="chart-avg-bg" rx="3"/>');
     gridValues.forEach(function(gval) {
       var gy = yScale(gval);
-      avgSvgParts.push('<line x1="0" y1="' + gy + '" x2="' + avgInnerW + '" y2="' + gy + '" stroke="#e0e4ea" stroke-width="0.75"/>');
-      avgSvgParts.push('<text x="-8" y="' + (gy + 4) + '" font-size="12" fill="#888" text-anchor="end" font-family="-apple-system,sans-serif">' + gval.toFixed(1) + '</text>');
+      avgSvgParts.push('<line x1="0" y1="' + gy + '" x2="' + avgInnerW + '" y2="' + gy + '" class="chart-avg-grid" stroke-width="0.75"/>');
+      avgSvgParts.push('<text x="-8" y="' + (gy + 4) + '" font-size="12" class="chart-tick-y" text-anchor="end" font-family="-apple-system,sans-serif">' + gval.toFixed(1) + '</text>');
     });
-    avgSvgParts.push('<text transform="rotate(-90)" x="' + (-innerH / 2) + '" y="-46" font-size="13" fill="#888" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(metricLabel) + '</text>');
+    avgSvgParts.push('<text transform="rotate(-90)" x="' + (-innerH / 2) + '" y="-46" font-size="13" class="chart-tick-y" text-anchor="middle" font-family="-apple-system,sans-serif">' + escSvg(metricLabel) + '</text>');
     if (yMin <= 0.5) {
       var avgCy = yScale(0.5);
-      avgSvgParts.push('<line x1="0" y1="' + avgCy + '" x2="' + avgInnerW + '" y2="' + avgCy + '" stroke="#c0c0c0" stroke-width="1.5" stroke-dasharray="3,4"/>');
+      avgSvgParts.push('<line x1="0" y1="' + avgCy + '" x2="' + avgInnerW + '" y2="' + avgCy + '" class="chart-chance" stroke-width="1.5" stroke-dasharray="3,4"/>');
     }
     modelKeys.forEach(function(mkey, mi) {
       var d = data[mkey]["__avg__"];
@@ -1127,10 +1131,10 @@ function buildSubjectChartSection(dataset, records, metadata, metric, metricLabe
       avgSvgParts.push('<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + avgBarW + '" height="' + barH.toFixed(1) + '" fill="' + fill + '" opacity="1" rx="1" data-model="' + escSvg(mname) + '" data-dataset="' + escSvg(dataset) + '" data-task="__avg__" data-task-display="Average (all subjects)" data-mean="' + d.mean.toFixed(4) + '" data-se="' + (d.se || 0).toFixed(4) + '" data-n="' + d.n + '" style="cursor:pointer"/>');
       avgSvgParts.push(seBars(d, x, avgBarW, yScale, yMin, yMax));
     });
-    avgSvgParts.push('<line x1="0" y1="' + innerH + '" x2="' + avgInnerW + '" y2="' + innerH + '" stroke="#ccc" stroke-width="1"/>');
+    avgSvgParts.push('<line x1="0" y1="' + innerH + '" x2="' + avgInnerW + '" y2="' + innerH + '" class="chart-axis" stroke-width="1"/>');
     var lx = (avgInnerW / 2).toFixed(1);
-    avgSvgParts.push('<text x="' + lx + '" y="' + (innerH + 20) + '" font-size="13" fill="#444" font-weight="600" text-anchor="middle" font-family="-apple-system,sans-serif">Average</text>');
-    avgSvgParts.push('<line x1="' + avgInnerW + '" y1="-' + CHART.marginTop + '" x2="' + avgInnerW + '" y2="' + innerH + '" stroke="#d0d5dd" stroke-width="1.5" stroke-dasharray="4,3"/>');
+    avgSvgParts.push('<text x="' + lx + '" y="' + (innerH + 20) + '" font-size="13" class="chart-label" font-weight="600" text-anchor="middle" font-family="-apple-system,sans-serif">Average</text>');
+    avgSvgParts.push('<line x1="' + avgInnerW + '" y1="-' + CHART.marginTop + '" x2="' + avgInnerW + '" y2="' + innerH + '" class="chart-divider" stroke-width="1.5" stroke-dasharray="4,3"/>');
     avgSvgParts.push("</g></svg>");
   }
 
@@ -1176,9 +1180,9 @@ function seBars(d, x, barW, yScale, yMin, yMax) {
   var cx = (x + barW / 2).toFixed(1);
   var xLo = (x + barW / 2 - 2.5).toFixed(1);
   var xHi = (x + barW / 2 + 2.5).toFixed(1);
-  return '<line x1="' + cx + '" y1="' + seLo.toFixed(1) + '" x2="' + cx + '" y2="' + seHi.toFixed(1) + '" stroke="#444" stroke-width="1.5"/>' +
-    '<line x1="' + xLo + '" y1="' + seLo.toFixed(1) + '" x2="' + xHi + '" y2="' + seLo.toFixed(1) + '" stroke="#444" stroke-width="1.5"/>' +
-    '<line x1="' + xLo + '" y1="' + seHi.toFixed(1) + '" x2="' + xHi + '" y2="' + seHi.toFixed(1) + '" stroke="#444" stroke-width="1.5"/>';
+  return '<line x1="' + cx + '" y1="' + seLo.toFixed(1) + '" x2="' + cx + '" y2="' + seHi.toFixed(1) + '" class="chart-se" stroke-width="1.5"/>' +
+    '<line x1="' + xLo + '" y1="' + seLo.toFixed(1) + '" x2="' + xHi + '" y2="' + seLo.toFixed(1) + '" class="chart-se" stroke-width="1.5"/>' +
+    '<line x1="' + xLo + '" y1="' + seHi.toFixed(1) + '" x2="' + xHi + '" y2="' + seHi.toFixed(1) + '" class="chart-se" stroke-width="1.5"/>';
 }
 
 function wireChartClicks(filteredRecords) {
