@@ -959,18 +959,27 @@ html { font-size: 18px; scrollbar-gutter: stable; }
    SUBMIT PAGE
    ============================================================ */
 
-/* submit.html is prose on the leaderboard chrome, so it needs a measure and
-   heading rhythm that the table page has no use for. */
-/* Margin rather than padding-top: the responsive rules below reset the
+/* submit.html is prose on the leaderboard chrome, so it needs a heading rhythm
+   that the table page has no use for. It keeps .main-content's width so the
+   text lines up with the table and the masthead.
+   Margin rather than padding-top: the responsive rules below reset the
    .main-content padding shorthand. */
 .submit-page {
-  max-width: 46rem;
   margin-top: 3rem;
 }
 
+/* The opening lines carry the page's entry point, so the heading and lead use
+   the homepage scale rather than the smaller instruction type below them. */
 .submit-page h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.9rem;
+  /* font-size: clamp(1.5rem, 3.6vw, 1.85rem); */
+  line-height: 1.2;
+  margin-bottom: 0.7rem;
+}
+
+.submit-intro p:not(.submit-cta-row) {
+  /* max-width: 760px; */
+  color: var(--text); 
+   font-size: 1.12rem;
 }
 
 .submit-page h3 {

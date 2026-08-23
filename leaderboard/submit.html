@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4f2ee" />
+  <meta
+    name="description"
+    content="How to submit a model to the iMINDBench leaderboard: required files, validation commands, and the pull request template."
+  />
+  <title>Submit a model — iMINDBench</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+  />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../assets/theme.css" />
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-home-link" href="/" aria-label="Return to the iMINDBench homepage">
+        <h1 class="site-title">iMINDBench</h1>
+        <p class="site-subtitle">
+          iEEG Multi-Institution Neural Decoding Benchmark
+        </p>
+      </a>
+      <div class="leaderboard-header-actions">
+        <a class="header-home-link" href="./">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M4 20V10h4v10M10 20V4h4v16M16 20v-7h4v7M2 20h20" />
+          </svg>
+          Leaderboard
+        </a>
+        <a class="header-home-link" href="/">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="m3 11 9-8 9 8M5.5 9.5V21h13V9.5M9.5 21v-7h5v7" />
+          </svg>
+          Home
+        </a>
+        <button class="theme-toggle" type="button" aria-label="Use dark mode" title="Use dark mode">
+          <svg class="theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M20.4 15.2A8.5 8.5 0 0 1 8.8 3.6 8.5 8.5 0 1 0 20.4 15.2Z" />
+          </svg>
+          <svg class="theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3.5" />
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main-content submit-page">
+
+    <section class="submit-intro">
+      <h2>Submit a model</h2>
+      <p>
+        Adding a model to the leaderboard is a pull request that changes three
+        files. Your raw evaluation outputs are never committed: the tooling reads
+        them from a directory you point it at.
+      </p>
+      <p class="submit-cta-row">
+        <a
+          class="submit-cta"
+          href="https://github.com/imindbench/imindbench.github.io/compare?expand=1&amp;template=add_model.md"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          Open a submission pull request
+        </a>
+        <a
+          class="submit-cta-secondary"
+          href="https://github.com/imindbench/imindbench.github.io/blob/main/.github/PULL_REQUEST_TEMPLATE/add_model.md"
+          target="_blank"
+          rel="noopener noreferrer"
+        >View the pull request template</a>
+      </p>
+    </section>
+
+    <section class="submit-section">
+      <h3>Before you start</h3>
+      <ul class="submit-list">
+        <li>
+          Your complete <code>population_*.json</code> results, in one directory
+          outside the repository.
+        </li>
+        <li>
+          A model ID: lowercase letters, digits, and underscores, such as
+          <code>example_model</code>. Use it everywhere below.
+        </li>
+        <li>
+          A clone of the repository. Every path and command below is relative to
+          its <code>leaderboard/</code> directory.
+        </li>
+      </ul>
+    </section>
+
+    <section class="submit-section">
+      <h3>1. Describe your model</h3>
+      <p>Create <code>data/submissions/example_model.json</code>:</p>
+      <pre><code>{
+  "schema_version": 1,
+  "model_id": "example_model",
+  "display_name": "Example Model",
+  "pretrained": true,
+  "pretrained_on": "Public Dataset",
+  "description": "Short public description of the evaluated model.",
+  "coverage_note": null
+}</code></pre>
+      <p>
+        Use <code>null</code> for <code>pretrained_on</code> if the model is not
+        pretrained. Leave <code>coverage_note</code> as <code>null</code> unless
+        the coverage section below applies.
+      </p>
+    </section>
+
+    <section class="submit-section">
+      <h3>2. Generate the artifact</h3>
+      <pre><code>python add_model.py \
+  --model-outputs /path/to/evaluation_outputs/example_model \
+  --submission data/submissions/example_model.json \
+  --dry-run</code></pre>
+      <p>
+        This writes nothing. Read the summary it prints, in particular the
+        <code>coverage</code> and <code>cohort</code> lines. If it looks right,
+        run the same command again without <code>--dry-run</code>. That creates
+        <code>data/models/example_model.json</code> and updates
+        <code>data/manifest.json</code>.
+      </p>
+    </section>
+
+    <section class="submit-section">
+      <h3>3. Check, then open the pull request</h3>
+      <pre><code>python validate_data.py</code></pre>
+      <p>Commit these three files and nothing else:</p>
+      <ul class="submit-list">
+        <li><code>data/submissions/example_model.json</code></li>
+        <li><code>data/models/example_model.json</code></li>
+        <li><code>data/manifest.json</code></li>
+      </ul>
+      <p>
+        No raw outputs, no caches, no edits to another model. Open the pull
+        request with the link at the top of this page; the template asks for your
+        submission file, the coverage lines from step 2, and where the model
+        comes from. The same validator runs on your pull request.
+      </p>
+    </section>
+
+    <section class="submit-section">
+      <h3>Coverage</h3>
+      <p>
+        Evaluate on the whole benchmark if you can. If you cannot, cover exactly
+        the <strong>Main</strong> cohort or exactly the <strong>Challenge</strong>
+        cohort, and use the same choice throughout. Any other subset is rejected;
+        step 2 tells you which one you have.
+      </p>
+      <p>
+        A cohort submission is listed with an automatic footnote about the
+        subject-sessions it skipped. Name your cohort in
+        <code>coverage_note</code> and it is added to that footnote.
+      </p>
+      <p class="submit-note">
+        Updating a listed model, viewing the site locally, and the full schema:
+        <a
+          href="https://github.com/imindbench/imindbench.github.io/blob/main/leaderboard/README.md"
+          target="_blank"
+          rel="noopener noreferrer"
+        >leaderboard/README.md</a>.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <p>iMINDBench &middot; Multi-institution naturalistic neural decoding</p>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="https://arxiv.org/" target="_blank" rel="noopener noreferrer">Paper</a>
+      <a href="https://github.com/imindbench/iMINDBench" target="_blank" rel="noopener noreferrer">Code &amp; Data</a>
+      <a href="./">Leaderboard</a>
+      <a href="/">Home</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

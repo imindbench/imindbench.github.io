@@ -9,10 +9,13 @@ from collections import defaultdict
 from pathlib import Path
 
 from leaderboard_data import (
+    DEFAULT_DECODABLE_DIR,
     LeaderboardDataError,
     build_artifact,
+    classify_coverage_cohort,
     extract_records,
     json_bytes,
+    load_cohort_cells,
     load_json,
     manifest_model_paths,
     make_manifest,
@@ -34,14 +37,15 @@ DEFAULT_SUBMISSION_DIRS = (
 )
 
 
-def _print_summary(artifact: dict) -> None:
+def _print_summary(artifact: dict, cohorts: dict) -> None:
     summary = summarize_artifact(artifact)
     coverage = summary["coverage"]
+    cohort = classify_coverage_cohort(artifact["runs"], artifact["records"], cohorts)
     print(
         f"{summary['model_id']}: {summary['runs']} physical runs, "
         f"{summary['logical_entries']} logical entries, {summary['records']} folds, "
         f"coverage {coverage['observed_result_cells']}/{coverage['expected_result_cells']} "
-        f"({coverage['status']})"
+        f"({coverage['status']}, {cohort})"
     )
     for key, item in coverage["by_model_preprocess_key"].items():
         if item["status"] != "complete":
@@ -66,6 +70,7 @@ def main(argv: list[str] | None = None) -> int:
             "Defaults to data/baseline_submissions and data/submissions."
         ),
     )
+    parser.add_argument("--decodable-dir", type=Path, default=DEFAULT_DECODABLE_DIR)
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
@@ -76,6 +81,7 @@ def main(argv: list[str] | None = None) -> int:
         contract = validate_coverage_contract(
             load_json(args.coverage_contract.resolve())
         )
+        cohorts = load_cohort_cells(args.decodable_dir.resolve(), contract)
         submissions = {}
         submission_dirs = args.submission_dirs or list(DEFAULT_SUBMISSION_DIRS)
         for directory in submission_dirs:
@@ -102,11 +108,11 @@ def main(argv: list[str] | None = None) -> int:
                 f"{sorted(missing_submissions)}"
             )
         artifacts = {
-            model_id: build_artifact(submissions[model_id], records, contract)
+            model_id: build_artifact(submissions[model_id], records, contract, cohorts)
             for model_id, records in sorted(by_model.items())
         }
         for artifact in artifacts.values():
-            _print_summary(artifact)
+            _print_summary(artifact, cohorts)
 
         models_dir = args.models_dir.resolve()
         manifest_path = args.manifest.resolve()
@@ -114,7 +120,9 @@ def main(argv: list[str] | None = None) -> int:
             existing_manifest = load_json(manifest_path)
             validate_manifest(existing_manifest, manifest_path.parent)
             for relative in manifest_model_paths(existing_manifest):
-                validate_artifact(load_json(manifest_path.parent / relative), contract)
+                validate_artifact(
+                    load_json(manifest_path.parent / relative), contract, cohorts
+                )
         changes: dict[Path, bytes] = {}
         conflicts = []
         for model_id, artifact in artifacts.items():
