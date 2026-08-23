@@ -4,7 +4,6 @@
     "models/cnn.json",
     "models/diver.json",
     "models/htnet.json",
-    "models/linear_baseline.json",
     "models/logistic.json",
     "models/mlp.json",
     "models/popt.json"
