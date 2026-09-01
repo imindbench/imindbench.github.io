@@ -6,8 +6,10 @@ takes an explicit external path.
 
 ## View it locally
 
-Serve the repository root, not this directory: the pages load the shared theme
-from `../assets/`.
+Download the repository and open its root `index.html` directly. The generated
+`data_bundle.js` lets the leaderboard load under `file://` without a server.
+
+To test through HTTP instead, serve the repository root, not this directory:
 
 ```bash
 python3 -m http.server 8899 --bind 127.0.0.1
@@ -68,15 +70,17 @@ preprocessing entry, with missing cells broken down by dataset. Its coverage
 grid comes from `data/coverage_contract.json` and is never inferred from other
 models.
 
-Applying writes `data/models/example_model.json` and adds its sorted path to
-`data/manifest.json`. Re-running with identical inputs is a no-op. Paths listed
+Applying writes `data/models/example_model.json`, adds its sorted path to
+`data/manifest.json`, and refreshes the generated `data_bundle.js` used by
+browsers. Re-running with identical inputs is a no-op. Paths listed
 under `unpublished_models` are validated but not loaded by the browser.
 
-Commit exactly three files:
+Commit exactly four files:
 
 - `data/submissions/<model_id>.json`
 - `data/models/<model_id>.json`
 - `data/manifest.json`
+- `data_bundle.js`
 
 Never commit raw evaluation outputs, caches, temporary files, or private
 author and contact metadata, and check the diff for unrelated model artifacts.
@@ -102,7 +106,7 @@ python add_model.py \
 
 Review the before/after summary, then drop `--dry-run` to apply it. A differing
 existing artifact fails without `--overwrite`; `--dry-run` never writes. For an
-update, normally only `data/models/<model_id>.json` changes.
+update, normally `data/models/<model_id>.json` and `data_bundle.js` change.
 
 ## Validate
 
@@ -113,7 +117,8 @@ python validate_data.py
 Checks the manifest, every visible and unpublished artifact, run references,
 record uniqueness, the benchmark coverage contract, the decodable-subject
 manifests, the cohort rule, and every submission file, using only checked-in
-files. Submissions and artifacts must correspond one-to-one, and an artifact's
+files. It also verifies that `data_bundle.js` exactly matches its canonical JSON
+inputs. Submissions and artifacts must correspond one-to-one, and an artifact's
 `model` block must match its submission file, so hand-editing one without the
 other fails.
 
@@ -174,7 +179,8 @@ python generate_data.py --outputs-dir /path/to/jul21_arxiv_leaderboard --dry-run
 Destinations default to `data/models`, `data/manifest.json`,
 `data/coverage_contract.json`, and two submission sources
 (`data/baseline_submissions` and `data/submissions`, overridable with repeated
-`--submissions-dir` flags).
+`--submissions-dir` flags). The browser bundle defaults beside the selected
+data directory and can be overridden with `--data-bundle`.
 
 Generation partitions the input by model, validates every proposed artifact
 before writing, and leaves checked-in models absent from the input alone. If a
@@ -191,8 +197,10 @@ leaderboard/
   index.html                         # the leaderboard app
   submit.html                        # public submission guide
   app.js
+  data_bundle.js                     # generated browser-readable data
   style.css
   add_model.py                       # add or update one model
+  build_data_bundle.py               # rebuild/check the browser data bundle
   generate_data.py                   # rebuild all baseline artifacts
   validate_data.py
   leaderboard_data.py                # shared schema and validation

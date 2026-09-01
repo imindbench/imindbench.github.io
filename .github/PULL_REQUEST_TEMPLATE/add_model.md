@@ -45,8 +45,9 @@ entirely on a full-grid submission.
 - [ ] Applied it:
       `python add_model.py --model-outputs /path/to/outputs/<model_id> --submission data/submissions/<model_id>.json`
 - [ ] `python validate_data.py` passes.
+- [ ] The generated `data_bundle.js` is included.
 - [ ] Committed only `data/submissions/<model_id>.json`,
-      `data/models/<model_id>.json`, and `data/manifest.json`.
+      `data/models/<model_id>.json`, `data/manifest.json`, and `data_bundle.js`.
 - [ ] No caches, temporary files, or private author/contact metadata are included.
 - [ ] Inspected the diff and confirmed no unrelated model artifact changed.
 - [ ] `data/coverage_contract.json` and the decodable-subject manifests are

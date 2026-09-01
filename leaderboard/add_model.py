@@ -19,6 +19,7 @@ from leaderboard_data import (
     manifest_model_paths,
     make_manifest,
     summarize_artifact,
+    sync_data_bundle,
     transactional_write,
     validate_artifact,
     validate_coverage_contract,
@@ -70,6 +71,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--coverage-contract", type=Path, default=DEFAULT_CONTRACT)
     parser.add_argument("--decodable-dir", type=Path, default=DEFAULT_DECODABLE_DIR)
+    parser.add_argument("--data-bundle", type=Path)
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
@@ -88,6 +90,11 @@ def main(argv: list[str] | None = None) -> int:
         print("\n".join(_summary_lines(artifact, cohorts)))
         models_dir = args.models_dir.resolve()
         manifest_path = args.manifest.resolve()
+        data_bundle_path = (
+            args.data_bundle.resolve()
+            if args.data_bundle
+            else manifest_path.parent.parent / "data_bundle.js"
+        )
         if manifest_path.exists():
             existing_manifest = load_json(manifest_path)
             validate_manifest(existing_manifest, manifest_path.parent)
@@ -124,6 +131,13 @@ def main(argv: list[str] | None = None) -> int:
                 )
             return 2
         if target.exists() and target.read_bytes() == proposed:
+            if not args.dry_run and sync_data_bundle(
+                manifest_path.parent,
+                args.decodable_dir.resolve(),
+                data_bundle_path,
+            ):
+                print("updated data_bundle.js")
+                return 0
             print("unchanged")
             return 0
         existing_ids = (
@@ -151,6 +165,11 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         transactional_write(changes)
         validate_manifest(load_json(manifest_path), manifest_path.parent)
+        sync_data_bundle(
+            manifest_path.parent,
+            args.decodable_dir.resolve(),
+            data_bundle_path,
+        )
         print(f"wrote {target}")
         return 0
     except LeaderboardDataError as exc:

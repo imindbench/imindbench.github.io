@@ -20,6 +20,7 @@ CONTRACT_SCHEMA_VERSION = 1
 PACKAGE_DIR = Path(__file__).resolve().parent
 DECODABLE_RULE = "stft_or_htnet_500hz_val_mean0p60"
 DEFAULT_DECODABLE_DIR = PACKAGE_DIR / "decodable_subject_sessions" / DECODABLE_RULE
+DEFAULT_DATA_BUNDLE = PACKAGE_DIR / "data_bundle.js"
 # A submission covers the whole benchmark or exactly one subject cohort. Any
 # other partial shape is rejected, because averages over an arbitrary subset of
 # subject-sessions cannot be compared with the other rows of the leaderboard.
@@ -978,6 +979,44 @@ def json_bytes(value: Any) -> bytes:
     return (
         json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     ).encode("utf-8")
+
+
+def build_data_bundle_bytes(
+    data_dir: Path, decodable_dir: Path = DEFAULT_DECODABLE_DIR
+) -> bytes:
+    """Serialize browser runtime inputs as a deterministic local-file-safe script."""
+    data_dir = Path(data_dir).resolve()
+    decodable_dir = Path(decodable_dir).resolve()
+    manifest = load_json(data_dir / "manifest.json")
+    validate_manifest(manifest, data_dir)
+    contract = validate_coverage_contract(load_json(data_dir / "coverage_contract.json"))
+    files = {
+        "data/manifest.json": manifest,
+        "data/coverage_contract.json": contract,
+    }
+    for relative in manifest.get("models", []):
+        files[f"data/{relative}"] = load_json(data_dir / relative)
+    for dataset in contract.get("datasets", {}):
+        filename = f"{dataset}.json"
+        files[f"decodable_subject_sessions/{DECODABLE_RULE}/{filename}"] = load_json(
+            decodable_dir / filename
+        )
+    payload = json.dumps(files, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
+    return f"window.IMINDBENCH_DATA_FILES = {payload};\n".encode("utf-8")
+
+
+def sync_data_bundle(
+    data_dir: Path,
+    decodable_dir: Path = DEFAULT_DECODABLE_DIR,
+    output: Path = DEFAULT_DATA_BUNDLE,
+) -> bool:
+    """Write the deterministic browser bundle when its canonical inputs changed."""
+    output = Path(output).resolve()
+    expected = build_data_bundle_bytes(data_dir, decodable_dir)
+    if output.is_file() and output.read_bytes() == expected:
+        return False
+    atomic_write(output, expected)
+    return True
 
 
 def atomic_write(path: Path, content: bytes) -> None:

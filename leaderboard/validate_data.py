@@ -10,6 +10,7 @@ from pathlib import Path
 from leaderboard_data import (
     DEFAULT_DECODABLE_DIR,
     LeaderboardDataError,
+    build_data_bundle_bytes,
     load_cohort_cells,
     load_json,
     manifest_model_paths,
@@ -109,6 +110,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-dir", type=Path, default=HERE / "data")
     parser.add_argument("--decodable-dir", type=Path, default=DEFAULT_DECODABLE_DIR)
+    parser.add_argument("--data-bundle", type=Path)
     parser.add_argument(
         "--submissions-dir",
         type=Path,
@@ -139,6 +141,17 @@ def main(argv: list[str] | None = None) -> int:
             args.submission_dirs or list(DEFAULT_SUBMISSION_DIRS)
         )
         cross_check_submissions(submissions, artifact_models)
+        expected_bundle = build_data_bundle_bytes(data_dir, args.decodable_dir)
+        data_bundle = (
+            args.data_bundle.resolve()
+            if args.data_bundle
+            else data_dir.parent / "data_bundle.js"
+        )
+        if not data_bundle.is_file() or data_bundle.read_bytes() != expected_bundle:
+            raise LeaderboardDataError(
+                f"{data_bundle}: data bundle is missing or stale; "
+                "run build_data_bundle.py"
+            )
         print(
             f"validated {len(artifact_paths)} model artifacts "
             f"and {len(submissions)} submissions"

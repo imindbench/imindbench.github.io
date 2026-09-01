@@ -25,6 +25,7 @@ Commit only:
 - `leaderboard/data/submissions/<model_id>.json`
 - `leaderboard/data/models/<model_id>.json`
 - `leaderboard/data/manifest.json`
+- `leaderboard/data_bundle.js`
 
 Then open a pull request using the
 [model submission template](.github/PULL_REQUEST_TEMPLATE/add_model.md):

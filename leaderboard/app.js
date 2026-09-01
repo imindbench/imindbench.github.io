@@ -1647,6 +1647,13 @@ function requireValue(condition, filename, message) {
 }
 
 async function fetchJson(filename, url) {
+  var bundledFiles = window.IMINDBENCH_DATA_FILES;
+  if (bundledFiles) {
+    if (!Object.prototype.hasOwnProperty.call(bundledFiles, url)) {
+      throw new Error(filename + ": missing from data_bundle.js");
+    }
+    return bundledFiles[url];
+  }
   var response;
   try {
     response = await fetch(url, { cache: "no-cache" });
@@ -1930,6 +1937,8 @@ function showLoadError(error) {
 async function init() {
   try {
     leaderboardData = await loadLeaderboardData();
+    // Hydration owns the normalized records now; release the large raw bundle.
+    window.IMINDBENCH_DATA_FILES = null;
   } catch (error) {
     showLoadError(error);
     return;
