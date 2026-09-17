@@ -256,7 +256,8 @@ h2 {
   line-height: 1;
 }
 
-.figure-section {
+.figure-section,
+.citation-section {
   margin-top: 2.75rem;
   padding-top: 2.25rem;
   border-top: 1px solid var(--border);
@@ -311,6 +312,28 @@ h2 {
 
 .figure-card figcaption a:hover {
   color: var(--accent-dark);
+}
+
+/* ============================================================
+   CITATION
+   ============================================================ */
+
+.citation-code {
+  margin: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.citation-code code {
+  font: inherit;
 }
 
 /* ============================================================
