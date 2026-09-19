@@ -32,6 +32,8 @@ entirely on a full-grid submission.
 
 ## Model details
 
+- **Config-derived tracks** (paste the `track:` lines from the dry-run report):
+- **Custom preprocessing / matched baseline**, if applicable:
 - **Paper / preprint**:
 - **Code**:
 - **Checkpoint availability**:

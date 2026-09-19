@@ -49,6 +49,16 @@ Write `data/submissions/example_model.json`:
 `coverage_note` is either `null` or a non-empty string. Unknown fields, and a
 model ID that disagrees with the raw results, are rejected.
 
+The importer accepts `config.preprocess` (or the historical `config.preprocessor`)
+as an ordered `chain` of named stages, or a single named stage. An overall chain
+`name` is not required. Historical overall names are retained only for display;
+they cannot select a track. Keep raw outputs in the existing
+`dataset/[subset/]run/regime/task/subject_session/population_*.json` hierarchy
+under the model output directory. PIPPI uses subset `high-cov`. When staging
+outputs from iMINDBench's dataset scripts, omit their extra `within_session/`
+output-group directory. Filename-based row grouping is unchanged by track
+classification.
+
 Preview, apply, then validate, all from `leaderboard/`:
 
 ```bash
@@ -69,6 +79,9 @@ fold records, and a `coverage: observed/expected (status)` line per
 preprocessing entry, with missing cells broken down by dataset. Its coverage
 grid comes from `data/coverage_contract.json` and is never inferred from other
 models.
+
+The report also lists the config-derived track and its explanation for each run.
+Check these lines before applying the submission, especially Custom routes.
 
 Applying writes `data/models/example_model.json`, adds its sorted path to
 `data/manifest.json`, and refreshes the generated `data_bundle.js` used by
@@ -125,6 +138,73 @@ other fails.
 [`.github/workflows/validate-leaderboard.yml`](../.github/workflows/validate-leaderboard.yml)
 runs this same command on every pull request, so a local pass should match the
 repository check.
+
+## Preprocessing tracks
+
+Track eligibility is computed from the ordered stages and their effective
+parameters by `preprocessing_tracks.py`, both when importing raw outputs and
+when validating the committed artifacts. Editing `preprocessing_track` by hand
+without a matching config fails validation. The browser displays **Multi-STFT**,
+**Waveform**, and **Custom**; stored IDs and URL filters remain `STFT`, `WAV`, and
+`Other` for compatibility. Coverage and cohort requirements apply to all tracks.
+All runs grouped into one displayed row must qualify for the same track.
+
+The paper defines Multi-STFT using line-noise notch filtering, Laplacian
+rereferencing, three frequency resolutions, and training-fitted per-channel,
+per-frequency normalization. Automatic admission currently recognizes the
+following canonical recipe:
+
+- Exactly `time_domain_filter` → `laplacian_rereference` → `multi_stft` →
+  `standardize`, with no added transforms.
+- Standard notches at 60, 120, 180, 240, 300, and 360 Hz below Nyquist; no
+  high-pass or high-gamma bandpass. The supported recipe uses per-window causal
+  notch filtering with Q=30 and drops non-Laplacian channels.
+- Matching filter/STFT rates of 1000 or 2048 Hz. Ordered low/mid/high bands are
+  2–40, 20–150, and 80–250 Hz. Window durations are 0.5, 0.25, and 0.125 seconds;
+  exact sample counts are 500/250/125 or 1024/512/256. Hops are 62 or 128 samples,
+  respectively; no task-specific window selection is admitted.
+- Hann windows, reflection padding, no additional padding, clipping or internal
+  z-scoring, float32 STFT computation, and final
+  `standardize.mode: per_channel_samples_time_pooled` with `eps: 1e-8`.
+  Per-window overrides are inspected as well as top-level settings.
+
+The exact padding, window, Q, and execution options above describe the supported
+canonical implementation; they are not additional claims about what the paper
+text specifies. Unrecognized variations are Custom pending review. In particular,
+single-STFT, BrainBERT representations, and sample-normalized Multi-STFT do not
+qualify for the standardized Multi-STFT track.
+
+The Waveform track requires a **0.5 Hz** high-pass filter, line-noise notches,
+Laplacian rereferencing with non-Laplacian channels removed, and waveform inputs:
+
+- Recognized filters are `time_domain_filter` with the standard harmonic notches
+  and `time_domain_filter_diver_style` with 60/120/180 Hz notches. High-gamma
+  bandpass filtering is excluded.
+- Optional context is loaded before filtering and cropped back to the target
+  before rereferencing/resampling. Resampling may precede or follow Laplacian
+  rereferencing, accommodating BaRISTA. Rate declarations must agree throughout.
+- Supported waveform normalization modes and sampling rates may vary, as allowed
+  by the paper. This includes robust scaling, sample normalization, their
+  composition, and no additional normalization. Historical `downsample` and
+  `upsampler` stages are recognized alongside `resample`.
+- Spectral transforms, unknown stages/settings, and unsupported stage ordering
+  are Custom. Same-track membership does not imply identical inputs: the
+  standardized baseline, BaRISTA, and DIVER remain distinct recipes.
+
+Historical defaults are implementation-specific: omitted standard-filter
+`high_pass_hz` means 0.0; omitted or null DIVER `high_pass_hz` means 0.5. Omitted
+notch lists use the corresponding frequencies above. Standard-filter null HP
+values and malformed stage/numeric fields are errors, not an alternate recipe.
+Explicit no-HPF waveform configs are Custom. A config outside a recognized recipe
+is explained in the submission report, not silently promoted based on its name.
+
+Custom routes should document preprocessing and provide a compatible simple
+baseline where possible, following the paper's custom-route guidance. Config
+checks verify declared eligibility, not truthful execution, training-only fitting,
+or score reproducibility. The evaluator remains responsible for those behaviors.
+
+Run importer/eligibility regression tests from the repository root with
+`python -m unittest discover -s tests -v`; CI runs them with artifact validation.
 
 ## Coverage behavior
 

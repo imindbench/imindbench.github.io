@@ -7,6 +7,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from preprocessing_tracks import classify_preprocessing
 from leaderboard_data import (
     DEFAULT_DECODABLE_DIR,
     LeaderboardDataError,
@@ -60,6 +61,10 @@ def _summary_lines(artifact: dict, cohorts: dict) -> list[str]:
             f"  {key}: {item['observed_result_cells']}/{item['expected_result_cells']} cells, "
             f"{item['fold_records']} folds, missing by dataset={item['missing_by_dataset']}"
         )
+    for run in artifact["runs"]:
+        track, reason = classify_preprocessing(run["preprocessing_chain"])
+        label = {"STFT": "Multi-STFT", "WAV": "Waveform", "Other": "Custom"}[track]
+        lines.append(f"  track: {label} ({run['run_dir']}): {reason}")
     return lines
 
 
