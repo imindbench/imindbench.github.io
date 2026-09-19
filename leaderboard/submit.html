@@ -188,6 +188,25 @@
       </p>
     </section>
 
+    <section class="submit-section">
+      <h3>Preprocessing tracks</h3>
+      <p>
+        Tracks are determined from the ordered preprocessing stages and parameters
+        in your results, not a model name or an overall pipeline name.
+        Multi-STFT requires the benchmark's three-resolution spectral recipe and
+        training-fitted normalization. Waveform requires 0.5 Hz high-pass filtering,
+        line-noise notch filtering, and Laplacian rereferencing, with supported
+        sampling and normalization variants. Other routes are displayed as Custom.
+      </p>
+      <p>
+        Check the track explanations in the dry-run report. Custom routes should
+        describe their preprocessing and include a matched simple baseline where
+        possible. See the
+        <a href="https://github.com/imindbench/imindbench.github.io/blob/main/leaderboard/README.md#preprocessing-tracks">eligibility rules and historical defaults</a>.
+        Validation checks declared configurations; it does not rerun evaluations.
+      </p>
+    </section>
+
     <section class="submit-final-cta" aria-labelledby="submit-ready-title">
       <h3 id="submit-ready-title">Ready to submit?</h3>
       <p>Open a pull request after committing the four files and passing validation.</p>

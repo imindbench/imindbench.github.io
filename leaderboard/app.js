@@ -187,16 +187,19 @@ function escHtml(s) {
 
 function escSvg(s) { return escHtml(s); }
 
-// Keep the UI's three track labels aligned with classify_track in leaderboard_data.py.
+// Stable artifact/URL IDs; eligibility is checked by the Python submission validator.
 var TRACK_BADGE_CLASS = { WAV: "track-wav", STFT: "track-stft", Other: "track-other" };
+
+function getTrackLabel(track) {
+  return { STFT: "Multi-STFT", WAV: "Waveform", Other: "Custom" }[track] || "Custom";
+}
 
 function trackBadgeClass(track) {
   return "track-badge " + (TRACK_BADGE_CLASS[track] || "track-other");
 }
 
 function trackBadgeHtml(track) {
-  var label = track || "Other";
-  return '<span class="' + trackBadgeClass(label) + '">' + escHtml(label) + "</span>";
+  return '<span class="' + trackBadgeClass(track) + '">' + escHtml(getTrackLabel(track)) + "</span>";
 }
 
 /**
@@ -372,7 +375,7 @@ function renderTable(filteredRecords, metadata) {
     html += "<td>" + badge + escHtml(getModelDisplay(row.modelName)) + coverageIcon + "</td>";
     html += "<td>";
     var trackCls = trackBadgeClass(row.preprocessingTrack);
-    html += '<span class="' + trackCls + '">' + escHtml(row.preprocessingTrack) + "</span>";
+    html += '<span class="' + trackCls + '">' + escHtml(getTrackLabel(row.preprocessingTrack)) + "</span>";
     html += '<span style="display:block;font-size:0.8rem;color:var(--text-faint);margin-top:0.1rem;">' + escHtml(prep) + "</span>";
     html += "</td>";
     html += "<td class='pretrain-cell'>";
@@ -437,7 +440,7 @@ function showModal(row, filteredRecords) {
   const title = document.getElementById("modal-title");
   const body = document.getElementById("modal-body");
 
-  title.textContent = getModelDisplay(row.modelName) + " \u2014 " + row.preprocessingTrack + " track";
+  title.textContent = getModelDisplay(row.modelName) + " \u2014 " + getTrackLabel(row.preprocessingTrack) + " track";
 
   const rep = filteredRecords.find(r => (r.model_preprocess_key || r.run_dir) === row.key)
     || filteredRecords.find(r => r.model_name === row.modelName);
@@ -461,7 +464,7 @@ function showModal(row, filteredRecords) {
     html += '<tr><td>Pretraining</td><td><span class="pretrain-no">Not pretrained</span></td></tr>';
   }
   html += "<tr><td>Preprocessing</td><td>" + escHtml(row.preprocessingName) + "</td></tr>";
-  html += "<tr><td>Track</td><td>" + escHtml(row.preprocessingTrack) + "</td></tr>";
+  html += "<tr><td>Track</td><td>" + escHtml(getTrackLabel(row.preprocessingTrack)) + "</td></tr>";
   html += "<tr><td>Eval mode</td><td>" + escHtml((rep && rep.eval_mode) || "within-session") + "</td></tr>";
   html += "</table></div>";
 

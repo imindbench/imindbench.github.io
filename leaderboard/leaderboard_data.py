@@ -12,6 +12,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from preprocessing_tracks import classify_preprocessing
 
 SCHEMA_VERSION = 2
 MANIFEST_SCHEMA_VERSION = 1
@@ -178,20 +179,6 @@ def make_preprocess_key(run_dir: str) -> str:
     value = re.sub(r"_\d+Hz", "", run_dir)
     value = re.sub(r"_\d+to\d+", "", value)
     return value
-
-
-def classify_track(name: str, chain: list[dict[str, Any]]) -> str:
-    if name in {"laplacian_stft", "laplacian_multi_stft"}:
-        return "STFT"
-    if name == "laplacian_wav_long_context_15s_diverstyle":
-        return "WAV"
-    if name.startswith("laplacian_wav") and any(
-        step.get("name") == "time_domain_filter"
-        and step.get("high_pass_hz") is not None
-        for step in chain
-    ):
-        return "WAV"
-    return "Other"
 
 
 def validate_metric(value: Any, field: str, source: str | Path = "record") -> None:
@@ -380,20 +367,25 @@ def extract_records(
         if not isinstance(preprocess, dict):
             raise LeaderboardDataError(f"{path}: missing preprocessing configuration")
         preprocess_name = preprocess.get("name")
-        chain = preprocess.get("chain")
-        if (
-            not isinstance(preprocess_name, str)
-            or not isinstance(chain, list)
-            or any(not isinstance(x, dict) for x in chain)
+        if "name" in preprocess and (
+            not isinstance(preprocess_name, str) or not preprocess_name.strip()
         ):
-            raise LeaderboardDataError(f"{path}: invalid preprocessing name or chain")
+            raise LeaderboardDataError(f"{path}: preprocessing name must be a non-empty string")
+        chain = preprocess["chain"] if "chain" in preprocess else [preprocess]
+        try:
+            track = classify_preprocessing(chain)[0]
+        except ValueError as exc:
+            raise LeaderboardDataError(f"{path}: {exc}") from exc
+        # Old chain names are display-only; current chains use ordered stage labels.
+        if preprocess_name is None:
+            preprocess_name = " -> ".join(stage["name"] for stage in chain)
         run = {
             "model_id": model_id,
             "run_dir": path_meta["run_dir"],
             "model_preprocess_key": make_preprocess_key(path_meta["run_dir"]),
             "run_display": make_run_display(path_meta["run_dir"]),
             "preprocessing_name": preprocess_name,
-            "preprocessing_track": classify_track(preprocess_name, chain),
+            "preprocessing_track": track,
             "preprocessing_chain": chain,
         }
         run["run_id"] = hashlib.sha256(canonical_json(run).encode("utf-8")).hexdigest()
@@ -806,17 +798,32 @@ def validate_artifact(
         or not records
     ):
         raise LeaderboardDataError("artifact runs and records must be non-empty lists")
-    run_ids = [run.get("run_id") for run in runs]
-    if len(run_ids) != len(set(run_ids)):
-        raise LeaderboardDataError("artifact contains duplicate run IDs")
-    run_id_set = set(run_ids)
+    tracks_by_key = {}
     for run in runs:
         if not isinstance(run, dict) or set(run) != RUN_FIELDS:
             raise LeaderboardDataError("artifact run has invalid fields")
         if not isinstance(run["run_id"], str) or not run["run_id"]:
             raise LeaderboardDataError("artifact run_id must be a non-empty string")
-        if run["preprocessing_track"] not in {"STFT", "WAV", "Other"}:
-            raise LeaderboardDataError("artifact run has invalid preprocessing_track")
+        try:
+            track, reason = classify_preprocessing(run["preprocessing_chain"])
+        except ValueError as exc:
+            raise LeaderboardDataError(f"run {run['run_id']}: {exc}") from exc
+        if run["preprocessing_track"] != track:
+            raise LeaderboardDataError(
+                f"run {run['run_id']}: preprocessing_track {run['preprocessing_track']!r} "
+                f"does not match config-derived {track!r}: {reason}"
+            )
+        # A displayed row has one track badge, including across dataset variants.
+        key = run["model_preprocess_key"]
+        if not isinstance(key, str) or not key:
+            raise LeaderboardDataError("artifact model_preprocess_key must be a non-empty string")
+        previous = tracks_by_key.setdefault(key, track)
+        if previous != track:
+            raise LeaderboardDataError(f"logical preprocessing entry {key!r} mixes tracks")
+    run_ids = [run["run_id"] for run in runs]
+    if len(run_ids) != len(set(run_ids)):
+        raise LeaderboardDataError("artifact contains duplicate run IDs")
+    run_id_set = set(run_ids)
     identities = set()
     folds_by_result: dict[tuple[Any, ...], set[int]] = defaultdict(set)
     for record in records:
